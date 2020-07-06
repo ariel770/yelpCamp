@@ -61,7 +61,9 @@ route.post("/",middlewhere.isLoggedIn,function(req,res){
     var name = req.body.name;
     var image ={
        home :req.body.home,
-       autside :req.body.autside
+       autside :req.body.autside,
+       home1 :req.body.home1,
+       autside1 :req.body.autside1
      };
     var desc = req.body.description;
     var price = req.body.price;

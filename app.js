@@ -35,16 +35,21 @@ app.set("view engine","ejs");
 
 // mongodb+srv://pinjas:<password>@cluster0-849zr.mongodb.net/<dbname>?retryWrites=true&w=majority
 // mongoose.connect("mongodb://localhost:27017/yelp_camp_v13",{useNewUrlParser:true});
-mongoose.connect("mongodb+srv://pinjas:ariel@cluster0.2hzvt.mongodb.net/yelpcamp_1?retryWrites=true&w=majority",{useNewUrlParser:true,
-useCreateIndex:true}).then(()=>{
-   console.log("CONNECTED TO DB");
-   console.log("CONNECTED !!");
-   console.log("===============");
+mongoose
+     .connect("mongodb+srv://pinjas:ariel@cluster0.2hzvt.mongodb.net/yelpcamp_1?retryWrites=true&w=majority", { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+     .then(() => console.log( 'Database Connected' ))
+     .catch(err => console.log( err ));
 
-}).catch((err) => {
-        console.log("ERROR!!!"+err);
+// mongoose.connect("mongodb+srv://pinjas:ariel@cluster0.2hzvt.mongodb.net/yelpcamp_1?retryWrites=true&w=majority",{useNewUrlParser:true,
+// useCreateIndex:true}).then(()=>{
+//    console.log("CONNECTED TO DB");
+//    console.log("CONNECTED !!");
+//    console.log("===============");
 
-});
+// }).catch((err) => {
+//         console.log("ERROR!!!"+err);
+
+// });
 
 //PASSPORT CONFIGURATE
 app.use(require('express-session')({

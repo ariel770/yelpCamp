@@ -1,0 +1,69 @@
+
+<%- include("../partials/header") %>
+
+
+<div class="container">
+  
+  <header class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9">
+                  <h1>ברוכים הבאים לגלאט צימר </h1>
+                  <h3>פתרון התיירות לציבור הדתי והחרדי </h3>
+                  <p>
+                    <a class="btn btn-primary btn-lg" href="/campGround/new">צור מקום אירוח</a>
+                  </p>
+        </div>
+
+        <div class="col-lg-3 sortfilter">
+          <div class="row separate">
+            <label for="filter">Filter By :</label> 
+          <form class="form-inline" action="/campGround/filtering" id="filter" method="POST">
+            <select class="form-control" name="filter" >
+                <option value="">..הצג הכל</option>
+                <option value="north">צפון</option>
+                <option value="east">מערב</option>
+                <option value="south">דרום</option>
+              </select>
+            <input class="btn btn-danger btn-size" type="submit" value="..חפש">
+          </form>
+        </div>
+          <div class="row separate">
+            <label for="sort">Sort By :</label>
+              <form class="form-inline" action="/campground/sortby" id="sort" method="POST">
+                <select class="form-control" name="sort" >
+                  <option value="location">מיקום </option>
+                  <option value="price">מחיר</option>
+                </select>
+                <input class="btn btn-danger btn-size " type="submit" value=" ..מיין לפי">
+              </form>  
+          </div>
+      </div>
+      
+
+
+
+</div>
+   
+ </header> 
+<div class="row text-center" style="display: flex;flex-wrap: wrap;">
+    <%camp.forEach(function(campground){ %>
+   
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnail">
+              <img src="<%= campground.image.home %>" class="img-thumbnail">
+              <div class="caption">
+                <h4><%= campground.name %> </h4>
+                <h4><%= campground.author.username%> </h4>
+              </div> 
+              <div class="row align-items-end">
+                  <a class="btn btn-primary btn-index-thumbnail" href="/campGround/<%= campground._id %>">פרטים</a>
+                </div>
+            </div>         
+        </div>   
+        <% });%> 
+ </div>
+
+</div>
+
+<%- include("../partials/footer") %>

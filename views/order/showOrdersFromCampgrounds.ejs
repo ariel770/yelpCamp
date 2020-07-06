@@ -1,0 +1,23 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+<p> Show Orders From : <%= campground.name %> </p>
+<button><a href="/campground/<%= campground._id %>/">Show Page</a></button>
+    
+    
+    <%for(i=0;i<order.length;i++){%>
+        <p>============= Order #<%=i+1%> =====================</p>
+        <p> <strong><%= order[i].author.username%></strong></p>      
+        <% var date = new Date(order[i].from)%>
+        <% var date1 = new Date(order[i].to)%>
+        <%var month  =  date.getMonth()+1%>
+        <%  var from =date.getDate()+" / "+ month +" / "+ date.getFullYear() %>
+        <%  var to = date1.getDate()+" / "+date1.getMonth() +" / "+  date1.getFullYear() %>
+        <p>From  :</p>
+        <strong><%=from%></strong>
+        <p>To    :</p>
+        <strong><%=to%></strong>
+        <%}%>
+    </div>
+        
+        <%- include("../partials/footer") %>

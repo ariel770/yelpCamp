@@ -1,0 +1,29 @@
+<%- include ("../partials/header")%>
+<div class="container">
+
+  <p>Orders From : <%=user.username%></p>
+  <button> <a href="javascript:history.back()">Go Back</a></button>
+  <button><a href="/campground/">Index Page</a></button>
+  <%for(i=0;i<user.order.length;i++){%>
+    <%for(b=0;b<camp.length;b++){%>
+      <% if(camp[b].id == order[i].campground){%>
+        <% var date = new Date(order[i].from)%>
+        <% var date1 = new Date(order[i].to)%>
+    
+        <%var month  =  date.getMonth()+1%>
+        <%var month1 =  date1.getMonth()+1%>
+        <%  var from =  date.getDate()+" / "+month+" / "+ date.getFullYear() %>
+        <%  var to =  date1.getDate()+" / "+month1+" / "+ date1.getFullYear() %>
+
+          <p>===== order =====</p> 
+                <p>From  :</p>
+                <Strong><%=from%></Strong>
+                <p>To    :</p>
+                <Strong><%=to%></Strong>
+                <p><%=camp[b].name%></p>
+
+        <%}%>
+        <%}%>
+        <%}%>
+      </div>
+        <%- include ("../partials/footer")%>

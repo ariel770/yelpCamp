@@ -1,0 +1,86 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+  <div class="row">
+     <div class="col-md-3">
+      <div class="list-group">
+         <a class="list-group-item" href="/campGround/<%= campground._id%>/orders">הזמנות ל<%= campground.name%></a>
+         <!-- <a href="#" class="list-group-item">Option 2</a>
+         <a href="#" class="list-group-item">Option 3</a> -->
+       </div>
+     </div>
+
+     <div class="col-md-9">
+        <div class="thumbnail">
+           <div class="show-nice">
+              <div  class="row">
+                 <div class="col-md-6">
+                    <img class="img-responsive img-thumbnail" src="<%= campground.image.home%>">
+                  </div> 
+                  <div class="col-md-6">
+                     <img class="img-responsive img-thumbnail" src="<%= campground.image.autside%>">
+                  </div> 
+               </div>
+               <div class="row">
+                  <div class="col-md-6">
+                     <img class="img-responsive img-thumbnail" src="<%= campground.image.autside%>">
+                  </div> 
+                  <div class="col-md-6">
+                     <img class="img-responsive img-thumbnail" src="<%= campground.image.autside%>">
+                  </div> 
+               </div>
+            </div>
+               
+                 <tr>
+                  <div class="caption-full">
+                  <h4 class="pull-right"> <%= campground.price%> $ / ללילה</h4>
+                 
+                  <div class="caption">
+                         <h4><a href="/campGround/<%= campground._id%>/orders"><%= campground.name %></a></h4> 
+                          <p><em>נוצר על ידי<%= campground.author.username%></em></p> 
+                          <button><a class="btn btn-success" href="/campGround/<%=campground._id%>/order/<%= currentUser._id%>/new">הזמנה חדשה</a></button>
+                          <button><a class="btn btn-warning " href= "/campGround/<%= campground._id%>/edit">ערוך</a></button> 
+                          <form class="delete-form" action="/campGround/<%= campground._id%>?_method=DELETE"method="POST">
+                            <button  class="btn btn-danger">מחק</button>
+                          </form>                          
+                         <p><strong>מיקום  :  <%= campground.location%></strong></p>
+                         <p>תיאור :  <%= campground.description %></p>
+               </div>
+                
+       
+            <div class="well">
+              <div class="text-right">
+               <!-- <a class="btn btn-success" href="/campGround/<%= campground._id %>">View Orders</a> -->
+               <a class="btn btn-success" href="/campGround/<%= campground._id %>/comment/new">הוסף תגובה</a>
+              </div>        
+                 <% campground.comments.forEach(function(comment){ %>
+                  <div class="row">
+                     <div class="col-md-12">
+                        <strong><%= comment.author.username %></strong>  
+                  
+                       <p><%= comment.text %></p>
+                       <% if(currentUser && comment.author.id.equals(currentUser._id)){%>
+                       <a href="/campGround/<%= campground._id %>/comment/<%= comment._id%>/edit" class="btn btn-xs btn-warning">ערוך </a>
+                        <form class="delete-form" action="/campGround/<%= campground._id %>/comment/<%= comment._id%>?_method=delete" method="post">
+                         <input type="submit" class="btn btn-xs btn-danger" value="מחק">
+                        </form>
+                        <%}%> 
+                     </div>
+                  </div>
+                 <% })%>
+
+               </div>
+            </div>
+        
+         
+        
+        
+         
+         </div>
+        </div>
+     </div>
+  </div>
+
+</div>   
+
+<%- include("../partials/footer") %>

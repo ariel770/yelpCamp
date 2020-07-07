@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
     <script
@@ -19,10 +19,19 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">GlatTzimer</a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
+        <!-- #1 navbar brand in header  -->
+        <a class="navbar-brand" href="/">GlatTzimer</a>
+        <!-- #1 navbar toggle header  -->
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainoption" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+             </button>
+             </div>
+            <!-- connect to collapse navbar -->
+            <div class="collapse navbar-collapse" id="mainoption">
+                <ul class="nav navbar-nav navbar-right" >
                     <% if(!currentUser){%>
                         <li><a href="/login">כניסה</a></li>
                         <li><a href="/register">הרשמה</a></li>
@@ -30,10 +39,38 @@
                          <li><a href="/campground/order/<%= currentUser.id%>/">הזמנות קודמות :<%= currentUser.username%></a></li>
                          <li><a href="/logout">יציאה</a></li>
                     <% } %>
-                </ul>
+                         <li class="active">
+                             <a href="/campGround/new"> צור מקום אירוח</a>
+                         </li>
+
+                    
+                    <!-- <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">מיין<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li> -->
+                    
+                    </ul>
+
+
+
             </div>
         </div>
     </nav>
+
+
+
+
+
+
+
+
     <div class="container">
         <% if(error && error.length > 0){%>
             <div class="alert alert-danger" role="alert">

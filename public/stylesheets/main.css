@@ -1,13 +1,35 @@
 body{ 
 background-color: darkslategray;
 }
-.separate{
+/* index page */
+.col-md-4{
+    margin: auto;
+}
+/* .separate{
     padding:20px 10px;
     margin: 30px;
+    display: contents;
+} */
+label {
+    /* Other styling... */
+    text-align: right;
+    clear: both;
+    float:right;
+    margin-right:15px;
 }
 
-strong,p,h3,h1{
+strong,p{
  color:white;   
+}
+.col-lg-9 h1, .col-lg-9 h3{
+    text-align: right;
+    color: darkslategray;
+   font-family: 'David Libre', serif;
+;
+   text-shadow: brown 3px ;
+}
+.col-lg-9 .index-col-3-up {
+ text-align: right;
 }
 .btn-size:hover{
     background-color: greenyellow;
@@ -17,10 +39,7 @@ strong,p,h3,h1{
     border: darkslategray 15px solid;
     background-color:dimgrey ;
 }
-.jumbotron h1{
-color: white;
 
-}
 .jumbotron{
     background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRyVktHikJmYPMEqo6sQPw8BM7_IzDHgzy9Gg&usqp=CAU") no-repeat center center fixed; 
     -webkit-background-size: cover;

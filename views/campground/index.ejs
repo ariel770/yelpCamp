@@ -7,19 +7,12 @@
   <header class="jumbotron">
     <div class="container">
       <div class="row">
-        <div class="col-lg-9">
-                  <h1>ברוכים הבאים לגלאט צימר </h1>
-                  <h3>פתרון התיירות לציבור הדתי והחרדי </h3>
-                  <p>
-                    <a class="btn btn-primary btn-lg" href="/campGround/new">צור מקום אירוח</a>
-                  </p>
-        </div>
-
-        <div class="col-lg-3 sortfilter">
+        
+        <div class="col-lg-3 col-md-6 sortfilter">
           <div class="row separate">
-            <label for="filter">סנן :</label> 
+            <label for="sort">סנן:</label>
           <form class="form-inline" action="/campGround/filtering" id="filter" method="POST">
-            <select class="form-control" name="filter" >
+            <select onchange="this.form.submit()" class="form-control" name="filter" >
                 <option value="">..הצג הכל</option>
                 <option value="north">צפון</option>
                 <option value="east">מערב</option>
@@ -27,21 +20,26 @@
                 <option value="center">מרכז</option>
                 <option value="bne-brak">בני ברק</option>
               </select>
-            <input class="btn btn-danger btn-size" type="submit" value="..חפש">
           </form>
         </div>
           <div class="row separate">
-            <label for="sort">מיין אתרים לפי:</label>
-              <form class="form-inline" action="/campground/sortby" id="sort" method="POST">
-                <select class="form-control" name="sort" >
+            <label for="sort">מיין :</label>
+              <form class="form-inline"  action="/campground/sortby" id="sort" method="POST">
+                <select class="form-control" onchange="this.form.submit()" name="sort" >
                   <option value="location">מיקום </option>
                   <option value="price">מחיר</option>
                 </select>
-                <input class="btn btn-danger btn-size " type="submit" value=" ..מיין לפי">
               </form>  
           </div>
       </div>
-      
+        <div class="col-lg-9 col-md-6 col-sm-12 index-col-3-up ">
+        
+                  <h1>ברוכים הבאים לגלאט צימר </h1>
+                  <h3>פתרון התיירות לציבור הדתי והחרדי </h3>
+          
+        </div>
+        
+        
 
 
 
@@ -51,9 +49,9 @@
 <div class="row text-center" style="display: flex;flex-wrap: wrap;">
     <%camp.forEach(function(campground){ %>
    
-        <div class="col-md-3 col-sm-6">
+        <div class=" col-lg-3 col-md-4 col-sm-6">
             <div class="thumbnail">
-              <img src="<%= campground.image.home %>" class="img-thumbnail">
+              <img style="width: 286px; height: 200px;" src="<%= campground.image.home %>" class="img-thumbnail">
               <div class="caption">
                 <h4><%= campground.name %> </h4>
                 <h4><%= campground.author.username%> </h4>

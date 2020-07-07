@@ -42,12 +42,11 @@
                           <button><a class="btn btn-warning " href= "/campGround/<%= campground._id%>/edit">ערוך</a></button> 
                           <form class="delete-form" action="/campGround/<%= campground._id%>?_method=DELETE"method="POST">
                             <button  class="btn btn-danger">מחק</button>
+                       
                           </form>                          
                          <p><strong>מיקום  :  <%= campground.location%></strong></p>
                          <p>תיאור :  <%= campground.description %></p>
-               </div>
                 
-       
             <div class="well">
               <div class="text-right">
                <!-- <a class="btn btn-success" href="/campGround/<%= campground._id %>">View Orders</a> -->

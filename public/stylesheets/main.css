@@ -44,7 +44,7 @@ label{
    margin: 3px;
 }
 .thumbnail{   
-    min-width: 262px;
+    min-width: 262px; 
     min-height: 322px;  
 }
 .thumbnail .caption-full{

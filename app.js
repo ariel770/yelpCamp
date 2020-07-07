@@ -32,6 +32,18 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static( __dirname+"/public"));
 app.set("view engine","ejs");
 
+
+// console.log(process.env.DATABASEURL);
+// mongoose.connect("mongodb://localhost:27017/yelp_camp_v13",{useNewUrlParser:true});
+// mongoose.connect("mongodb+srv://pinjas:pinjas@cluster0-849zr.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true,
+// useCreateIndex:true}).then(()=>{
+//    console.log("CONNECTED TO DB") 
+// }).catch((err) => {
+//         console.log("ERROR!!!"+err);
+
+// });
+
+
 console.log(process.env.DATABASEURL);
 mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
 .then(() => console.log( 'Database Connected' ))

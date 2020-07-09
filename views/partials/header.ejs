@@ -22,7 +22,7 @@
         <!-- #1 navbar brand in header  -->
         <a class="navbar-brand" href="/">GlatTzimer</a>
         <!-- #1 navbar toggle header  -->
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainoption" aria-expanded="false">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainoption" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -39,28 +39,61 @@
                          <li><a href="/campground/order/<%= currentUser.id%>/">הזמנות קודמות :<%= currentUser.username%></a></li>
                          <li><a href="/logout">יציאה</a></li>
                     <% } %>
-                         <li class="active">
-                             <a href="/campGround/new"> צור מקום אירוח</a>
-                         </li>
-
                     
-                    <!-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">מיין<span class="caret"></span></a>
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">אפשרויות חיפוש<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
+                            <li>
+                                
+                                <form class="form-inline" action="/campGround/filtering" id="filter" method="POST">
+                                    
+                                    <select onchange="this.form.submit()" class="form-control" name="filter" >
+                                        
+                                        <option>סנן</option>
+                                        <option value="">בחר הכל</option>
+                                        
+                                        <option value="north">צפון</option>
+                                        
+                                        <option value="east">מערב</option>
+                                        
+                                        <option value="south">דרום</option>
+                                        
+                                        <option value="center">מרכז</option>
+                                        
+                                        <option value="bne-brak">בני ברק</option>
+                                        
+                                    </select>
+                                    
+                                    
+                                </form>
+                            </li>
+                            <li> 
+                                
+                                <form class="form-inline"  action="/campground/sortby" id="sort" method="POST">
+                                    <select class="form-control" onchange="this.form.submit()" name="sort" >
+                                        <option active value="">בחר מיקום </option>
+                                        <option value="location">מיקום </option>
+                                        <option value="price">מחיר</option>
+                                    </select>
+                                </form>  
+                            </li >
+                            
                         </ul>
-                    </li> -->
+                    </li>
+                    <li class="active">
+                        <a href="/campGround/new"> צור מקום אירוח</a>
+                    </li>
                     
-                    </ul>
-
-
-
+                </ul>
+                
+                
+                
             </div>
+            
+            
+            
+            
         </div>
     </nav>
 

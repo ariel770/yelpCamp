@@ -1,16 +1,12 @@
 
 <%- include("../partials/header") %>
-
-
 <div class="container">
-  
   <header class="jumbotron">
     <div class="container">
-      <div class="row">
-        
-        <div class="col-lg-3 col-md-6 sortfilter">
-          <div class="row separate">
-            <label for="sort">סנן:</label>
+      <div class="row ">
+        <div class="hidden-xs hidden-sm  col-md-5 col-lg-3 col-xl-3 searchoption">
+          <div class="row separate d-none ">
+            <label for="sort"> חפש תוצאות לפי מיקום </label>
           <form class="form-inline" action="/campGround/filtering" id="filter" method="POST">
             <select onchange="this.form.submit()" class="form-control" name="filter" >
                 <option value="">..הצג הכל</option>
@@ -23,7 +19,7 @@
           </form>
         </div>
           <div class="row separate">
-            <label for="sort">מיין :</label>
+            <label for="sort"> מייו  תוצאות</label>
               <form class="form-inline"  action="/campground/sortby" id="sort" method="POST">
                 <select class="form-control" onchange="this.form.submit()" name="sort" >
                   <option value="location">מיקום </option>
@@ -33,22 +29,13 @@
           </div>
       </div>
         <div class="col-lg-9 col-md-6 col-sm-12 index-col-3-up ">
-        
                   <h1>ברוכים הבאים לגלאט צימר </h1>
                   <h3>פתרון התיירות לציבור הדתי והחרדי </h3>
-          
         </div>
-        
-        
-
-
-
 </div>
-   
  </header> 
 <div class="row text-center" style="display: flex;flex-wrap: wrap;">
     <%camp.forEach(function(campground){ %>
-   
         <div class=" col-lg-3 col-md-4 col-sm-6">
             <div class="thumbnail">
               <img style="width: 286px; height: 200px;" src="<%= campground.image.home %>" class="img-thumbnail">
@@ -63,7 +50,5 @@
         </div>   
         <% });%> 
  </div>
-
 </div>
-
 <%- include("../partials/footer") %>

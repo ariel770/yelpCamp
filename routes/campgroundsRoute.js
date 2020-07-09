@@ -15,6 +15,7 @@ route.post("/filtering",function(req,res){
     }else{
         obj = {};
         }
+        console.log(" obj  :   "+ obj)
     Campground.find(obj,function(err,camp){
         if(err){
             res.redirect("back");

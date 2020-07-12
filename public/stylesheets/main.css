@@ -17,6 +17,9 @@ strong,p{
     color: maroon;
     
 }
+.img-thumbnail:hover{
+    transform: translate(4px,5px);
+}
 .thumbnail{   
     min-width: 262px; 
     min-height: 322px;  
@@ -25,7 +28,8 @@ strong,p{
     padding: 9px;
 }
 .jumbotron{
-    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgZFWafdTM2TfVSILxePEqG8C1_VDl_F-Pqg&usqp=CAU") no-repeat center center fixed; 
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTds5zW1uuogVDAbvsEfOuIFRu-u4JsUFV8Zg&usqp=CAU") no-repeat center center fixed; 
+    background-size: auto;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

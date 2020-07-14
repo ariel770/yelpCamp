@@ -27,16 +27,34 @@ strong,p{
 .thumbnail .caption-full{
     padding: 9px;
 }
+/* 
+    .jumbotron {
+        background-image: url(jumbotron.jpg);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+      }    */
+
+
 .jumbotron{
-    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTds5zW1uuogVDAbvsEfOuIFRu-u4JsUFV8Zg&usqp=CAU") no-repeat center center fixed; 
-    background-size: auto;
+    background: url(jumbotron.jpg) no-repeat center center fixed; 
+    background-position: center;
+    background-size:auto;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     padding: 30px;
+    background-attachment:fixed;
     
 }
+
 .col-lg-9 h1, .col-lg-9 h3{
     text-align: right;
     color: darkslategray;

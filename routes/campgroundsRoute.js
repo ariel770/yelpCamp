@@ -12,11 +12,13 @@ route.post("/filtering",function(req,res){
     var obj = {}   
     if(currentLocation !==""){
         obj.location= currentLocation; 
+        
     }else{
         obj = {};
         }
-        console.log(" obj  :   "+ obj)
+    console.log(" obj  :   "+ obj)
     Campground.find(obj,function(err,camp){
+
         if(err){
             res.redirect("back");
         }else{
@@ -40,18 +42,12 @@ route.post("/sortby",function(req,res){
     
 })
 
-
-
-
-
 route.get("/",function(req,res){
-        Campground.find({},function(err,camp){
+    Campground.find({},function(err,campground){
             if(err){
            console.log(err)     
        }else{
-    
-           
-           res.render("campground/index",{camp: camp ,currentUser:req.user});
+           res.render("campground/index",{ campground: campground ,currentUser:req.user});
        }    
    })    
 });   

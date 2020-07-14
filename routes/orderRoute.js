@@ -22,7 +22,7 @@ route.get("/order/:user_id/",function(req,res){
                         if(err){
                             res.redirect("back")  
                         }else{
-                            res.render("order/showOrders",{user:user,order:order,camp:campground});
+                            res.render("order/showOrders",{user:user,order:order,campground:campground});
                         }
                     })
 

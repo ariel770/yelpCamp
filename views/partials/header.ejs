@@ -1,99 +1,106 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-    <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="semantic/dist/semantic.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/stylesheets/main.css">
-    
+
     <title>GlatTzimer</title>
 </head>
+
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-        <!-- #1 navbar brand in header  -->
-        <a class="navbar-brand" href="/">GlatTzimer</a>
-        <!-- #1 navbar toggle header  -->
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainoption" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-             </button>
-             </div>
+                <!-- #1 navbar brand in header  -->
+                <a class="navbar-brand" href="/">GlatTzimer</a>
+                <!-- #1 navbar toggle header  -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainoption"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
             <!-- connect to collapse navbar -->
             <div class="collapse navbar-collapse" id="mainoption">
-                <ul class="nav navbar-nav navbar-right" >
+                <ul class="nav navbar-nav navbar-right">
                     <% if(!currentUser){%>
-                        <li><a href="/login">כניסה</a></li>
-                        <li><a href="/register">הרשמה</a></li>
-                   <% }else{ %>
-                         <li><a href="/campground/order/<%= currentUser.id%>/">הזמנות קודמות :<%= currentUser.username%></a></li>
-                         <li><a href="/logout">יציאה</a></li>
+                    <li><a href="/login">כניסה</a></li>
+                    <li><a href="/register">הרשמה</a></li>
+                    <% }else { %>
+                        <%if(campground._id !== undefined) { %>
+               <li><a href="/campGround/<%= campground._id%>/orders"> <%= campground.name%> הזמנות</a></li>
+                                         <%} %>
+                    <li><a href="/campground/order/<%= currentUser.id%>/"><%= currentUser.username%></a></li>
+                    <li><a href="/logout">יציאה</a></li>
                     <% } %>
-                    
-                    
+
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">אפשרויות חיפוש<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">אפשרויות חיפוש<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                
+
                                 <form class="form-inline" action="/campGround/filtering" id="filter" method="POST">
-                                    
-                                    <select onchange="this.form.submit()" class="form-control" name="filter" >
-                                        
+
+                                    <select onchange="this.form.submit()" class="form-control" name="filter">
+
                                         <option>סנן</option>
                                         <option value="">בחר הכל</option>
-                                        
+
                                         <option value="north">צפון</option>
-                                        
+
                                         <option value="east">מערב</option>
-                                        
+
                                         <option value="south">דרום</option>
-                                        
+
                                         <option value="center">מרכז</option>
-                                        
+
                                         <option value="bne-brak">בני ברק</option>
-                                        
+
                                     </select>
-                                    
-                                    
+
+
                                 </form>
                             </li>
-                            <li> 
-                                
-                                <form class="form-inline"  action="/campground/sortby" id="sort" method="POST">
-                                    <select class="form-control" onchange="this.form.submit()" name="sort" >
+                            <li>
+
+                                <form class="form-inline" action="/campground/sortby" id="sort" method="POST">
+                                    <select class="form-control" onchange="this.form.submit()" name="sort">
                                         <option active value="">בחר מיקום </option>
                                         <option value="location">מיקום </option>
                                         <option value="price">מחיר</option>
                                     </select>
-                                </form>  
-                            </li >
-                            
+                                </form>
+                            </li>
+
                         </ul>
                     </li>
                     <li class="active">
                         <a href="/campGround/new"> צור מקום אירוח</a>
                     </li>
-                    
+
                 </ul>
-                
-                
-                
+
+
+
             </div>
-            
-            
-            
-            
+
+
+
+
         </div>
     </nav>
 
@@ -106,16 +113,15 @@
 
     <div class="container">
         <% if(error && error.length > 0){%>
-            <div class="alert alert-danger" role="alert">
-                <%= error %>
-            </div>
-            
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+
         <%}if(success && success.length > 0){%>
-            <div class="alert alert-success" role="alert">
-                <%= success %>
-            </div>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
         <%}%>
             
     </div> 
    
-

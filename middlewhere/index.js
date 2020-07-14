@@ -15,7 +15,6 @@ middlewhereObj.checkDates = function(req,res,next){
 
 }
 
-
 middlewhereObj. permissionToMakeChangesInCampgrounds = function(req,res,next){
     if(req.isAuthenticated()){
         Campground.findById(req.params.id,function(err,campground){

@@ -4,6 +4,7 @@ var passport = require('passport');
 var User = require('../models/user');
 var Order = require('../models/order');
 
+
 route.get("/",function(req,res){
     res.render("landingpage");
 });

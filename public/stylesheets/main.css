@@ -18,7 +18,7 @@ strong,p{
     
 }
 .img-thumbnail:hover{
-    transform: translate(4px,5px);
+    transform:scale(1.2);
 }
 .thumbnail{   
     min-width: 262px; 
@@ -53,6 +53,11 @@ strong,p{
     padding: 30px;
     background-attachment:fixed;
     
+}
+.jumbotron:hover{
+opacity:0.9;    
+transform: scale(1.05);
+transition-duration: 2s;    
 }
 
 .col-lg-9 h1, .col-lg-9 h3{

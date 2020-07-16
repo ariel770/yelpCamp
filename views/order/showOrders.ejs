@@ -5,8 +5,8 @@
   <button> <a href="javascript:history.back()">Go Back</a></button>
   <button><a href="/campground/">Index Page</a></button>
   <%for(i=0;i<user.order.length;i++){%>
-    <%for(b=0;b<camp.length;b++){%>
-      <% if(camp[b].id == order[i].campground){%>
+    <%for(b=0;b<campground.length;b++){%>
+      <% if(campground[b].id == order[i].campground){%>
         <% var date = new Date(order[i].from)%>
         <% var date1 = new Date(order[i].to)%>
     
@@ -20,7 +20,7 @@
                 <Strong><%=from%></Strong>
                 <p>To    :</p>
                 <Strong><%=to%></Strong>
-                <p><%=camp[b].name%></p>
+                <p><%=campground[b].name%></p>
 
         <%}%>
         <%}%>

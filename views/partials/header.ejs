@@ -41,13 +41,13 @@
                     <li><a href="/register">הרשמה</a></li>
                     <% }else { %>
                         <%if(campground._id !== undefined) { %>
-               <li><a href="/campGround/<%= campground._id%>/orders"> <%= campground.name%> הזמנות</a></li>
+                   <li><a href="/campGround/<%= campground._id%>/orders"> <%= campground.name%></a></li>
                                          <%} %>
                     <li><a href="/campground/order/<%= currentUser.id%>/"><%= currentUser.username%></a></li>
                     <li><a href="/logout">יציאה</a></li>
                     <% } %>
 
-                    <li class="dropdown">
+                    <li class="dropdown hidden-md hidden-lg hidden-xl ">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">אפשרויות חיפוש<span class="caret"></span></a>
                         <ul class="dropdown-menu">

@@ -68,22 +68,30 @@ route.post("/",middlewhere.isLoggedIn,function(req,res){
     var author = {
                     id:req.user.id,
                     username:req.user.username
-                 }      
-    var newCG = {name:name,image:image,description:desc,price:price,author:author,location:location};             
-    Campground.create(newCG,function(err,camp){
+                 };    
+    var contact = req.body.contact;
+    var newCG = {contact:contact, name:name,image:image,description:desc,price:price,author:author,location:location};             
+   
+    Campground.create(newCG,function(err,campground){
         if(err){
             console.log(err);
         }else{
-         console.log(camp);   
-        } 
-    });    
-
-
-    res.redirect("/campGround");
+        //  console.log(camp);   
+        // res.render("campground/show",{campground:campground});    
+        res.redirect("/campGround/"+campground.id);
+    } 
+});
 });    
 
 route.get("/new",middlewhere.isLoggedIn,function(req,res){
-    res.render("campground/newCampground")
+    Campground.find({},function(err,campground){
+        if(err){
+
+            res.redirect("back");
+        }else{
+            res.render("campground/newCampground",{campground:campground});
+        }
+    })
 });    
 
 
@@ -92,12 +100,12 @@ route.get("/new",middlewhere.isLoggedIn,function(req,res){
 
 route.get("/:id",middlewhere.isLoggedIn,function(req,res){
     
-    Campground.findById(req.params.id).populate("comments").exec(function(err,description){
+    Campground.findById(req.params.id).populate("comments").exec(function(err,campground){
         if(err){
             console.log(err);
         }else{
 
-            res.render("campground/show",{campground:description});
+            res.render("campground/show",{campground:campground});
         }    
         
     })    

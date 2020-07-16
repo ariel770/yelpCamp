@@ -27,7 +27,7 @@ route.post("/register",function(req,res){
         
         User.authenticate("local")(req,res,function(){
             req.flash('success', 'נרשמת בהצלחה!');
-           res.redirect("/campground");
+            res.redirect("/campground");
            
         })
         

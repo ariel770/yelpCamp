@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static( __dirname+"/public"));
 app.set("view engine","ejs");
 
-
+//set DATABASEURL=mongodb://localhost:27017/yelp_camp_v13
 // console.log(process.env.DATABASEURL);
 // mongoose.connect("mongodb://localhost:27017/yelp_camp_v13",{useNewUrlParser:true});
 // mongoose.connect("mongodb+srv://pinjas:pinjas@cluster0-849zr.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true,

@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <!-- #1 navbar brand in header  -->
-                <a class="navbar-brand" href="/">GlatTzimer</a>
+                <a class="navbar-brand" href="/campground">GlatTzimer</a>
                 <!-- #1 navbar toggle header  -->
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainoption"
                     aria-expanded="false">
@@ -40,9 +40,9 @@
                     <li><a href="/login">כניסה</a></li>
                     <li><a href="/register">הרשמה</a></li>
                     <% }else { %>
-                        <%if(campground._id !== undefined) { %>
-                   <li><a href="/campGround/<%= campground._id%>/orders"> <%= campground.name%></a></li>
-                                         <%} %>
+                    <%if(campground._id !== undefined) { %>
+                    <li><a href="/campGround/<%= campground._id%>/orders"> <%= campground.name%></a></li>
+                    <%} %>
                     <li><a href="/campground/order/<%= currentUser.id%>/"><%= currentUser.username%></a></li>
                     <li><a href="/logout">יציאה</a></li>
                     <% } %>
@@ -51,28 +51,23 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                             aria-expanded="false">אפשרויות חיפוש<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>
-
-                                <form class="form-inline" action="/campGround/filtering" id="filter" method="POST">
-
-                                    <select onchange="this.form.submit()" class="form-control" name="filter">
-
-                                        <option>סנן</option>
-                                        <option value="">בחר הכל</option>
-
+                            <li  >
+                                <form id="navnarsearchoption" class="form-inline" action="/campGround/filterandsort" id="filter" method="POST">
+                                    <select class="form-control" name="filter">
+                                        <option value="" disabled selected hidden>חפש</option>
+                                        <option value="">..הצג הכל</option>
                                         <option value="north">צפון</option>
-
                                         <option value="east">מערב</option>
-
                                         <option value="south">דרום</option>
-
                                         <option value="center">מרכז</option>
-
                                         <option value="bne-brak">בני ברק</option>
-
                                     </select>
-
-
+                                    <select class="form-control" name="sort">
+                                        <option value="" disabled selected hidden>מיין </option>
+                                        <option value="location">מיקום </option>
+                                        <option value="price">מחיר</option>
+                                    </select>
+                                    <button class="btn btn-lg btn-primary btn-block ">חיפוש מתקדם</button>
                                 </form>
                             </li>
                             <li>

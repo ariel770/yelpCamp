@@ -5,38 +5,61 @@ var Order = require('../models/order');
 var User = require('../models/user');
 var middlewhere  = require('../middlewhere/index.js')
 
-
-
-route.post("/filtering",function(req,res){
+route.post("/filterandsort", function (req, res) {
     var currentLocation = req.body.filter;
-    var obj = {}   
-    if(currentLocation !==""){
-        obj.location= currentLocation; 
-        
-    }else{
+    var obj = {}
+    if (currentLocation !== "") {
+        obj.location = currentLocation;
+    } else {
         obj = {};
-        }
-    console.log(" obj  :   "+ obj)
-    Campground.find(obj,function(err,camp){
-
-        if(err){
+    }
+    var obj1 = {}
+    var sort = req.body.sort;
+    obj1[sort] = "1";
+    Campground.find(obj).sort(obj1).exec(function (err, campground) {
+        if (err) {
             res.redirect("back");
-        }else{
-                res.render("campground/index",{camp: camp ,currentUser:req.user});
-            }
-    })
-});
+        } else {
+            res.render("campground/index", { campground: campground, currentUser: req.user });
+        }
+    });
+
+
+
+})
+
+
+
+// route.post("/filtering",function(req,res){
+//     var currentLocation = req.body.filter;
+//     var obj = {}   
+//     if(currentLocation !==""){
+//         obj.location= currentLocation; 
+        
+//     }else{
+//         obj = {};
+//         }
+//     console.log(" obj  :   "+ obj)
+//     Campground.find(obj,function(err,camp){
+
+//         if(err){
+//             res.redirect("back");
+//         }else{
+//                 res.render("campground/index",{camp: camp ,currentUser:req.user});
+//             }
+//     })
+// });
 route.post("/sortby",function(req,res){
     var obj = {}
-     var sort = req.body.sort; 
-     obj[sort]= "1" ; 
+    var sort = req.body.sort; 
+    obj[sort]= "1" ; 
      console.log(obj)
-    Campground.find({}).sort(obj).exec(function(err,camp){
+    Campground.find({}).sort(obj).exec(function(err,campground){
         if(err) {
             console.log("Error Finding Query " + err);
         }
         
-        res.render("campground/index",{camp: camp ,currentUser:req.user});
+        res.render("campground/index",{campground: campground ,currentUser:req.user});
     });
     
     
@@ -64,13 +87,14 @@ route.post("/",middlewhere.isLoggedIn,function(req,res){
      };
     var desc = req.body.description;
     var price = req.body.price;
+    var kashrut = req.body.kashrut;
     var location = req.body.location;
     var author = {
                     id:req.user.id,
                     username:req.user.username
                  };    
     var contact = req.body.contact;
-    var newCG = {contact:contact, name:name,image:image,description:desc,price:price,author:author,location:location};             
+    var newCG = {kashrut:kashrut, contact:contact, name:name,image:image,description:desc,price:price,author:author,location:location};             
    
     Campground.create(newCG,function(err,campground){
         if(err){

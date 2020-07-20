@@ -10,10 +10,13 @@
                <p> <%= campground.description %>: תיאור</p>
             </div>        
             <div class="text-right">
-               <p><a href="#"><%= campground.contact %></a> :פרטי קשר</p>
+               <p><a href="http://www.gmail.com"><%= campground.contact %></a> :פרטי קשר</p>
             </div>        
             <div class="text-right">
                <p><%= campground.location %>: מיקום  </p>
+            </div>        
+            <div class="text-right">
+               <p><%= campground.kashrut %>: כשרות  </p>
             </div>        
             </div>
        </div>
@@ -43,21 +46,23 @@
                   <div class="caption-full">
                   <h4 class="pull-left"><%= campground.price%> ILS /ללילה  </h4>
                  
-                  <div class="caption ">
+                  <div class="caption">
                      <div id="location_in_thumbnail">
                              <h4>שם המקום : <a href="/campGround/<%= campground._id%>/orders"><%= campground.name %></a></h4> 
                               <p><em><%= campground.author.username%></em> :נוצר על ידי</p> 
                           </div>
 
-                     <%if(currentUser && campground.author.id.equals(currentUser.id)){%>
-                        
-                        <button><a class="btn btn-success" href="/campGround/<%=campground._id%>/order/<%= currentUser._id%>/new">הזמנה חדשה</a></button>
-                        <button><a class="btn btn-warning " href= "/campGround/<%= campground._id%>/edit">ערוך</a></button> 
-                        <form class="delete-form" action="/campGround/<%= campground._id%>?_method=DELETE"method="POST">
-                          <button  class="btn btn-danger">מחק</button>
-                        </form>                          
-
-               <%}%>
+                          <%if(currentUser && campground.author.id.equals(currentUser.id)){%>
+                           
+                           <button><a class="btn btn-warning " href= "/campGround/<%= campground._id%>/edit">ערוך</a></button> 
+                           <form class="delete-form" action="/campGround/<%= campground._id%>?_method=DELETE"method="POST">
+                              <button  class="btn btn-danger">מחק</button>
+                           </form>                          
+                           
+                           <%}else if(currentUser || campground.author.id.equals(currentUser.id)){ %>
+                              <button><a class="btn btn-success" href="/campGround/<%=campground._id%>/order/<%= currentUser._id%>/new">הזמנה חדשה</a></button>
+                              
+                     <%}%> 
                 
             <div class="well">
               <div class="text-right">

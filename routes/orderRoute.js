@@ -46,7 +46,7 @@ route.get("/:campground_id/order/:user_id/",function(req,res){
                                 if(err){
                                     res.redirect("back")  
                                 }else{
-                                    res.render("order/showOrders",{user:user,order:order,camp:campground});
+                                    res.render("order/showOrders",{user:user,order:order,campground:campground});
                                 }
                             })
                         }     
@@ -93,14 +93,13 @@ route.post("/:campground_id/order/:user_id/",middelewhere.checkDates,function(re
                 if(err){
                     res.redirect("back")                        
                 }else{
-                    Campground.findById(req.params.campground_id,function(err,camp){
+                    Campground.findById(req.params.campground_id,function(err,campground){
                         if(err){
                             res.redirect("back")                        
                         }else{
-                            camp.occupancyReservation = true ;
-                            console.log("    ======= ======= ======= =======  ======== ======= ======= = =======   :    "+camp)
-                            camp.orders.push(newOrder)
-                            camp.save();
+                            campground.occupancyReservation = true ;
+                            campground.orders.push(newOrder)
+                            campground.save();
                         }
                     })      
                     user.order.push(newOrder);
@@ -109,10 +108,10 @@ route.post("/:campground_id/order/:user_id/",middelewhere.checkDates,function(re
                         if(err){
                             res.redirect("back");
                         }else{ 
-                            Campground.find({},function(err,camp){
+                            Campground.find({},function(err,campground){
                                 if(err){
                                 }else{
-                                    res.redirect("/campGround/"+camp.id+"/order/"+user._id);            
+                                    res.redirect("/campGround/"+campground.id+"/order/"+user._id);            
                                 }
                             })
                             

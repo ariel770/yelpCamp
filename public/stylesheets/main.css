@@ -28,6 +28,9 @@ strong,p{
 .thumbnail .caption-full{
     padding: 9px;
 }
+.well p, .well strong{
+    color: black;
+}
 /* 
     .jumbotron {
         background-image: url(jumbotron.jpg);
@@ -44,7 +47,7 @@ strong,p{
 
 
 .jumbotron{
-    background: url(jumbotron.jpg) no-repeat center center fixed; 
+    background: url(road-in-between-grass-field-1423597.jpg) no-repeat center center fixed; 
     background-position: center;
     background-size:auto;
     -webkit-background-size: cover;
@@ -53,11 +56,11 @@ strong,p{
     background-size: cover;
     padding: 30px;
     background-attachment:fixed;
-    
+    opacity:0.9;    
 }
 .jumbotron:hover{
-opacity:0.9;    
-transform: scale(1.05);
+opacity:1;    
+transform: scale(1.10);
 transition-duration: 2s;    
 }
 
@@ -135,3 +138,8 @@ color: black;
         background: url(4.jpg);
     }
 }  */
+
+
+th, td{
+    color: white ;
+}

@@ -1,29 +1,53 @@
 <%- include ("../partials/header")%>
 <div class="container">
 
-  <p>Orders From : <%=user.username%></p>
-  <button> <a href="javascript:history.back()">Go Back</a></button>
-  <button><a href="/campground/">Index Page</a></button>
-  <%for(i=0;i<user.order.length;i++){%>
+  <p><%=user.username%> : הזמנות </p>
+
+  <div class="caption">
+    <button class="btn btn-primary"><a href="javascript:history.back()">עמוד קודם</a></button>
+    <button class="btn btn-warning"><a href="/campground/">דף ראשי</a></button>
+  </div>
+
+  <table class="table table-bordered table-dark  ">
+
+
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">כניסה</th>
+        <th scope="col">יציאה</th>
+        <th scope="col">צימר</th>
+      </tr>
+    </thead>
+    <%for(i=0;i<user.order.length;i++){%>
+
     <%for(b=0;b<campground.length;b++){%>
-      <% if(campground[b].id == order[i].campground){%>
-        <% var date = new Date(order[i].from)%>
-        <% var date1 = new Date(order[i].to)%>
-    
-        <%var month  =  date.getMonth()+1%>
-        <%var month1 =  date1.getMonth()+1%>
-        <%  var from =  date.getDate()+" / "+month+" / "+ date.getFullYear() %>
-        <%  var to =  date1.getDate()+" / "+month1+" / "+ date1.getFullYear() %>
+    <% if(campground[b].id == order[i].campground){%>
+     
 
-          <p>===== order =====</p> 
-                <p>From  :</p>
-                <Strong><%=from%></Strong>
-                <p>To    :</p>
-                <Strong><%=to%></Strong>
-                <p><%=campground[b].name%></p>
+    <% var date = new Date(order[i].from)%>
+    <% var date1 = new Date(order[i].to)%>
 
-        <%}%>
-        <%}%>
-        <%}%>
-      </div>
+    <%var month  =  date.getMonth()+1%>
+    <%var month1 =  date1.getMonth()+1%>
+    <%  var from =  date.getDate()+" / "+month+" / "+ date.getFullYear() %>
+    <%  var to =  date1.getDate()+" / "+month1+" / "+ date1.getFullYear() %>
+
+    <tbody>
+
+      <tr>
+        <th scope="row">#</th>
+        <td><Strong><%=from%></Strong></td>
+        <td><Strong><%=to%> </Strong></td>
+        <td>
+          <p><%=campground[b].name%></p>
+        </td>
+      </tr>
+    </tbody>
+    <%}%>
+          <%}%>
+    <%}%>
+        </div>
+      </table>
+      
         <%- include ("../partials/footer")%>

@@ -1,60 +1,143 @@
 <%- include ("../partials/header")%>
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center;">הוסף מקום אירוח חדש</h1>
-                 <div style="width:50%; margin: 20px auto;">
-                   <form action="/campGround" method="POST">  
-                  
-                   <div class="form-group">
-                       <input type="text" class="form-control" name="name" placeholder="הכנס שם אתר" required>
-                   </div>
-                  
-                   <div class="form-group">
-                       <input type="number" class="form-control" name="price" placeholder="מחיר" min="0.01" step="0.01" required >
-                   </div>
-                   <div class="form-group">
-                    <select class="form-control" name="location" required>
-                        <option value="">מיקום</option>
-                        <option value="north">צפון</option>
-                        <option value="east">מערב</option>
-                        <option value="south">דרום</option>
-                        <option value="center">מרכז</option>
-                        <option value="bne-brak">בני ברק</option>
-                      </select>   
-                   </div>
-                   <div class="form-group">
-                    <select class="form-control" name="kashrut" required>
-                        <option value="">כשרות</option>
-                        <option value="landau">הרב לנדאו</option>
-                        <option value="eda charedit">עדה החרדית </option>
-                      </select>   
-                   </div>
-                   <div class="form-group">
-                       <input type="text" class="form-control" name="home" placeholder="תמונה מתוך הדירה " required>
-                   </div>
-                   <div class="form-group">
-                       <input type="text" class="form-control" name="home1" placeholder="תמונה מתוך הדירה " required>
-                   </div>
-                   <div class="form-group">
-                       <input type="text" class="form-control" name="autside" placeholder="תמונה מבחוץ" required>
-                   </div>
-                   <div class="form-group">
-                       <input type="text" class="form-control" name="autside1" placeholder="תמונה מבחוץ" required>
-                   </div>
-                   <div class="form-group">
-                       <input type="text" class="form-control" name="description" placeholder="תיאור המקום">
-                   </div>
-                   <div class="form-group">
-                       <input type="email" class="form-control" name="contact" placeholder="פרטי קשר">
-                   </div>
+        <h1 style="text-align: center;color: white;">הוסף מקום אירוח חדש</h1>
+        <div style="width:50%; margin: 20px auto;">
+            <form action="/campGround" autocomplete="off" method="POST">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="name" placeholder="הכנס שם אתר" required>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" name="location" required>
+                                <option value="">מיקום</option>
+                                <option value="north">צפון</option>
+                                <option value="east">מערב</option>
+                                <option value="south">דרום</option>
+                                <option value="center">מרכז</option>
+                                <option value="bne-brak">בני ברק</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="price" placeholder="מחיר" min="0.01"
+                                step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name="kashrut" required>
+                                <option value="">כשרות</option>
+                                <option value="landau">הרב לנדאו</option>
+                                <option value="eda charedit">עדה החרדית </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="description" placeholder="תיאור המקום">
+                </div>
+                
+                <div class="form-group"> 
+                    <button class="btn btn-lg btn-success btn-block" type="button" data-toggle="collapse"
+                    data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">צור קשר</button>
+                </div>
+                <div class="row">
+                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="contact[phone]" placeholder="טלפון">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="contact[number]" placeholder="מייל">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group"> 
+                    <button class="btn btn-lg btn btn-primary btn-block" type="button" data-toggle="collapse"
+                    data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">הוסף תמונות</button>
+                </div>
+                <div class="row">
+                    <div class="collapse multi-collapse" id="multiCollapseExample3">
+                        
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="home" placeholder="תמונה מתוך הדירה "
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="home1" placeholder="תמונה מתוך הדירה "
+                                required>
+                        </div>
+                      
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="autside1" placeholder="תמונה מבחוץ" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="autside" placeholder="תמונה מבחוץ" required>
+                        </div>
+                    </div>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <button class="btn btn-lg btn btn-warning btn-block" type="button" data-toggle="collapse"
+                    data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">מה
+                    כלול</button>
+                </div>
+                    <div class="row check-color">
+                    <div class="collapse multi-collapse" id="multiCollapseExample2">
+
+                        <div class="col-md-4">
+                            <label for="airconditioner">
+                                מיזוג אוויר :
+                                <input type="checkbox" name="airconditioner" id="airconditioner">
+                            </label>
+                            <label for="parking">
+                                חניה :
+                                <input type="checkbox" name="parking" id="parking">
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="platter">
+                                פלטה :
+                                <input type="checkbox" name="platter" id="platter">
+                            </label>
+                            <label for="crib">
+                                מיטת תינוק/לול :
+                                <input type="checkbox" name="crib" id="crib">
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="linen">
+                                כלי מיטה :
+                                <input type="checkbox" name="linen" id="linen">
+                            </label>
+                            <label for="kettle">
+                                מיחם שבת :
+                                <input type="checkbox" name="kettle" id="kettle">
+                            </label>
+                        </div>
+                    </div>
+                </div>
                  
-                   <div class="form-group">
-                       <button class="btn btn-lg btn-primary btn-block ">הוסף מקום</button>
-                   </div>
-   
-                   </form>
-                   <a href="/campGround">חזור</a>
-                   </div> 
-   </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn btn-danger btn-block ">הוסף מקום</button>
+                </div>
+            </form>
+            <a href="/campGround">חזור</a>
+        </div>
+    </div>
 </div>
 <%- include ("../partials/footer")%>

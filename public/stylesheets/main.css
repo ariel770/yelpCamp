@@ -143,3 +143,24 @@ color: black;
 th, td{
     color: white ;
 }
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+}
+input[type='checkbox']:checked {
+    background: #abd;
+}
+.check-color{
+    text-align: end;
+    background-color: rgb(148, 112, 112);
+    margin: 6px;
+    
+}
+.check-color .l{
+    border:2px solid black;    
+}

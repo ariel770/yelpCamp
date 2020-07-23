@@ -164,3 +164,32 @@ input[type='checkbox']:checked {
 .check-color .l{
     border:2px solid black;    
 }
+
+/* nice button to research in index page */
+#btn1{
+    outline:none;
+    border:none;
+    position:relative;
+    color:white;
+    font-weight:300px;
+    font-size:16px;
+    padding:25px 80px;
+    margin:0 auto;
+    border-radius:5px;
+    box-shadow:0 6px black;
+  }
+  
+  #btn1:hover{
+    box-shadow:0 4px black;
+    top:4px;
+  }
+  
+  #btn1:active{
+    box-shadow:none;
+      top:6px;
+  }
+
+  .fa{
+      float: left;
+  }
+ 

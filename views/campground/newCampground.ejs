@@ -1,27 +1,35 @@
 <%- include ("../partials/header")%>
 <div class="container">
     <div class="row">
-        <h1 style="text-align: center;color: white;">הוסף מקום אירוח חדש</h1>
+        <h1 style="text-align: center;color: white;text-decoration: underline;">הוסף מקום אירוח חדש</h1>
         <div style="width:50%; margin: 20px auto;">
-            <form action="/campGround" autocomplete="off" method="POST">
+            <form action="/campGround" method="POST">
+                <!-- <form action="/campGround" autocomplete="off" method="POST"> -->
                 <div class="row">
                     <div class="col-md-6">
 
                         <div class="form-group">
                             <input type="text" class="form-control" name="name" placeholder="הכנס שם אתר" required>
                         </div>
-
                         <div class="form-group">
-                            <select class="form-control" name="location" required>
-                                <option value="">מיקום</option>
-                                <option value="north">צפון</option>
-                                <option value="east">מערב</option>
-                                <option value="south">דרום</option>
-                                <option value="center">מרכז</option>
-                                <option value="bne-brak">בני ברק</option>
-                            </select>
-                        </div>
 
+                            <input type="text" list="location" multiple class="form-control" name="location"
+                                placeholder="חפש עיר" /> <datalist id="location">
+                                <datalist id="location">
+                                    <option value="jerusalem">ירושלים</option>
+                                    <option value="safed">צפת</option>
+                                    <option value="modiin">מודיעין עילית</option>
+                                    <option value="netania">נתניה</option>
+                                    <option value="meron">מירון</option>
+                                    <option value="or-haganuz">אור הגנוז</option>
+                                    <option value="arad">ערד</option>
+                                    <option value="elad">אלעד</option>
+                                    <option value="tiberias">טבריה</option>
+                                    <option value="beitar-ilit">ביתר עילית</option>
+                                    <option value="maale-amos">מעלה עמוס</option>
+                                    <option value="kfar-chabad">כפר חבד</option>
+                                </datalist>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -29,23 +37,32 @@
                                 step="0.01" required>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" name="kashrut" required>
+
+                            <input list="kashrut" multiple class="form-control" name="kashrut" placeholder="חפש כשרות">
+                            <datalist id="kashrut">
                                 <option value="">כשרות</option>
-                                <option value="landau">הרב לנדאו</option>
-                                <option value="eda charedit">עדה החרדית </option>
-                            </select>
+                                <option value="kehilot">קהילות</option>
+                                <option value="harav-landau">הרב לנדאו</option>
+                                <option value="harav-rubin">הרב רובין</option>
+                                <option value="harav-majpud">הרב מחפוד</option>
+                                <option value="beit-yosef">בית יוסף</option>
+                                <option value="chabad">חבד</option>
+                                <option value="heda-charedit">עדה החרדית </option>
+                            </datalist>
                         </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <input type="text" class="form-control" name="description" placeholder="תיאור המקום">
                 </div>
-                
-                <div class="form-group"> 
+
+                <!-- <div class="form-group">
                     <button class="btn btn-lg btn-success btn-block" type="button" data-toggle="collapse"
-                    data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">צור קשר</button>
-                </div>
-                <div class="row">
+                        data-target="#multiCollapseExample1" aria-expanded="false"
+                        aria-controls="multiCollapseExample1">צור קשר</button>
+                </div> -->
+                <!--<div class="row">
                     <div class="collapse multi-collapse" id="multiCollapseExample1">
 
                         <div class="col-sm-6">
@@ -59,57 +76,60 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>  -->
 
-                <div class="form-group"> 
+                <div class="form-group">
                     <button class="btn btn-lg btn btn-primary btn-block" type="button" data-toggle="collapse"
-                    data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">הוסף תמונות</button>
+                        data-target="#multiCollapseExample3" aria-expanded="false"
+                        aria-controls="multiCollapseExample3">הוסף תמונות</button>
                 </div>
                 <div class="row">
                     <div class="collapse multi-collapse" id="multiCollapseExample3">
-                        
-                    <div class="col-md-6">
 
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="home" placeholder="תמונה מתוך הדירה "
-                                required>
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="home" placeholder="תמונה מתוך הדירה "
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="home1" placeholder="תמונה מתוך הדירה "
+                                    required>
+                            </div>
+
                         </div>
-                        <div class="form-group">
-                            <input type="file" class="form-control" name="home1" placeholder="תמונה מתוך הדירה "
-                                required>
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="autside1" placeholder="תמונה מבחוץ"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="autside" placeholder="תמונה מבחוץ"
+                                    required>
+                            </div>
                         </div>
-                      
                     </div>
-                    <div class="col-md-6">
-                        
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="autside1" placeholder="תמונה מבחוץ" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="file" class="form-control" name="autside" placeholder="תמונה מבחוץ" required>
-                        </div>
-                    </div>
-                    </div>
-                </div> 
+                </div>
                 <div class="form-group">
                     <button class="btn btn-lg btn btn-warning btn-block" type="button" data-toggle="collapse"
-                    data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">מה
-                    כלול</button>
+                        data-target="#multiCollapseExample2" aria-expanded="false"
+                        aria-controls="multiCollapseExample2">הוסף דברים כלולים</button>
                 </div>
-                    <div class="row check-color">
+                <div class="row check-color">
                     <div class="collapse multi-collapse" id="multiCollapseExample2">
 
-                        <div class="col-md-4">
+                        <div class="col-lg-4">
                             <label for="airconditioner">
                                 מיזוג אוויר :
-                                <input type="checkbox" name="airconditioner" id="airconditioner">
+                                <input id="checkair" type="checkbox" name="airconditioner" id="airconditioner">
                             </label>
                             <label for="parking">
                                 חניה :
                                 <input type="checkbox" name="parking" id="parking">
                             </label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-lg-4">
                             <label for="platter">
                                 פלטה :
                                 <input type="checkbox" name="platter" id="platter">
@@ -119,7 +139,7 @@
                                 <input type="checkbox" name="crib" id="crib">
                             </label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-lg-4">
                             <label for="linen">
                                 כלי מיטה :
                                 <input type="checkbox" name="linen" id="linen">
@@ -131,9 +151,9 @@
                         </div>
                     </div>
                 </div>
-                 
+
                 <div class="form-group">
-                    <button class="btn btn-lg btn btn-danger btn-block ">הוסף מקום</button>
+                    <button id="btn1" class="btn btn-danger btn-block">צור מקום</button>
                 </div>
             </form>
             <a href="/campGround">חזור</a>

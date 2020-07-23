@@ -18,7 +18,9 @@ route.get("/register",function(req,res){
 })
 
 route.post("/register",function(req,res){
-    User.register(new User({username:req.body.username, UserType:'user'}),req.body.password,function(err,user){
+    var newuser = {username:req.body.username, UserType:'user',contact:req.body.contact}
+    User.register(new User(newuser),req.body.password,function(err,user){
+        console.log("newuser :  " + user);
         if(err){
             console.log(err);
             req.flash('error', err.message +" : "+ err.name);
@@ -26,6 +28,7 @@ route.post("/register",function(req,res){
         }
         
         User.authenticate("local")(req,res,function(){
+            
             req.flash('success', 'נרשמת בהצלחה!');
             res.redirect("/campground");
            

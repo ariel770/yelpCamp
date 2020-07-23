@@ -5,33 +5,69 @@
       <div class="row ">
         <div class="hidden-xs hidden-sm  col-md-5 col-lg-3 col-xl-3 searchoption">
           <div class="row separate d-none ">
-            <label for="sort"> חפש  </label>
+
+            <div class="form-group">
+              <button id="btn1" class="btn btn-lg btn-success btn-block" type="button" data-toggle="collapse"
+                  data-target="#multiCollapseExample1" aria-expanded="false"
+                  aria-controls="multiCollapseExample1">חיפוש מתקדם </button>
+          </div>
+          
+              <div class="collapse multi-collapse" id="multiCollapseExample1">
             <form class="form-inline" action="/campGround/filterandsort" id="filter" method="POST">
-              <select class="form-control" name="filter">
-                <option value="" disabled selected  hidden>חפש</option>
-                <option value="">..הצג הכל</option>
-                <option value="north">צפון</option>
-                <option value="east">מערב</option>
-                <option value="south">דרום</option>
-                <option value="center">מרכז</option>
-                <option value="bne-brak">בני ברק</option>
-              </select>
-              <select class="form-control"  name="sort">
-                <option value=""disabled selected  hidden>מיין </option>
+              <input type="text" list="filter" multiple class="form-control" name="filter" placeholder="חפש עיר" />
+              <datalist id="filter">
+                <option value="jerusalem">ירושלים</option>
+                <option value="safed">צפת</option>
+                <option value="modiin">מודיעין עילית</option>
+                <option value="netania">נתניה</option>
+                <option value="meron">מירון</option>
+                <option value="or-haganuz">אור הגנוז</option>
+                <option value="arad">ערד</option>
+                <option value="elad">אלעד</option>
+                <option value="tiberias">טבריה</option>
+                <option value="beitar-ilit">ביתר עילית</option>
+                <option value="maale-amos">מעלה עמוס</option>
+                <option value="kfar-chabad">כפר חבד</option>
+              </datalist>
+              <input type="text" list="sort" multiple class="form-control" name="sort"
+                placeholder="..מיין תוצאות לפי" />
+              <datalist id="sort">
                 <option value="location">מיקום </option>
                 <option value="price">מחיר</option>
-              </select>
-                <button class="btn btn-lg btn-primary btn-block ">חיפוש מתקדם</button>
+              </datalist>
+   
+            </form>
+          </div>
+          </div>
+          <div class="row separate">
+            
+            <form class="form-inline" action="/campground/sortby" id="sort" method="POST">
+              <input type="text" list="sort" multiple onchange="this.form.submit()" class="form-control" name="sort"
+                placeholder=" ..מיין לפי  " />
+              <datalist id="sort">
+                <option value="location">מיקום </option>
+                <option value="price">מחיר</option>
+
             </form>
           </div>
           <div class="row separate">
-            <label for="sort"> מייו</label>
-            <form class="form-inline" action="/campground/sortby" id="sort" method="POST">
-              <select class="form-control" onchange="this.form.submit()" name="sort">
-                <option value="" disabled selected  hidden>מיין</option>
-                <option value="location">מיקום </option>
-                <option value="price">מחיר</option>
-              </select>
+            <form id="navnarsearchoption" class="form-inline" action="/campGround/filtering" id="filter" method="POST">
+              <input type="text" list="filter" multiple onchange="this.form.submit()" class="form-control" name="filter"
+                placeholder="חפש עיר" />
+              <datalist id="filter">
+                <option value="jerusalem">ירושלים</option>
+                <option value="safed">צפת</option>
+                <option value="modiin">מודיעין עילית</option>
+                <option value="netania">נתניה</option>
+                <option value="meron">מירון</option>
+                <option value="or-haganuz">אור הגנוז</option>
+                <option value="arad">ערד</option>
+                <option value="elad">אלעד</option>
+                <option value="tiberias">טבריה</option>
+                <option value="beitar-ilit">ביתר עילית</option>
+                <option value="maale-amos">מעלה עמוס</option>
+                <option value="kfar-chabad">כפר חבד</option>
+              </datalist>
             </form>
           </div>
         </div>

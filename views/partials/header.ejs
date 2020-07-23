@@ -14,7 +14,7 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/stylesheets/main.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>GlatTzimer</title>
 </head>
 
@@ -40,7 +40,7 @@
                     <li><a href="/login">כניסה</a></li>
                     <li><a href="/register">הרשמה</a></li>
                     <% }else { %>
-                    <%if(campground._id !== undefined) { %>
+                    <%if(campGround && campground._id !== undefined) { %>
                     <li><a href="/campGround/<%= campground._id%>/orders"> <%= campground.name%></a></li>
                     <%} %>
                     <li><a href="/campground/order/<%= currentUser.id%>/"><%= currentUser.username%></a></li>
@@ -53,25 +53,32 @@
                         <ul class="dropdown-menu">
                             <li  >
                                 <form id="navnarsearchoption" class="form-inline" action="/campGround/filterandsort" id="filter" method="POST">
-                                    <select class="form-control" name="filter">
-                                        <option value="" disabled selected hidden>חפש</option>
-                                        <option value="">..הצג הכל</option>
-                                        <option value="north">צפון</option>
-                                        <option value="east">מערב</option>
-                                        <option value="south">דרום</option>
-                                        <option value="center">מרכז</option>
-                                        <option value="bne-brak">בני ברק</option>
-                                    </select>
-                                    <select class="form-control" name="sort">
+                                    <input type="text" list="filter" multiple  class="form-control"  name="filter" placeholder="חפש עיר"/>              
+                                        <datalist id="filter">
+                                        <option value="jerusalem">ירושלים</option>
+                                        <option value="safed">צפת</option>
+                                        <option value="modiin">מודיעין עילית</option>
+                                        <option value="netania">נתניה</option>
+                                        <option value="meron">מירון</option>
+                                        <option value="or-haganuz">אור הגנוז</option>
+                                        <option value="arad">ערד</option>
+                                        <option value="elad">אלעד</option>
+                                        <option value="tiberias">טבריה</option>
+                                        <option value="beitar-ilit">ביתר עילית</option>
+                                        <option value="maale-amos">מעלה עמוס</option>
+                                        <option value="kfar-chabad">כפר חבד</option>
+                                    </datalist>
+                                    <input type="text" list="sort" multiple  class="form-control"  name="sort" placeholder="חפש עיר"/>              
+                                        <datalist id="sort">
                                         <option value="" disabled selected hidden>מיין </option>
                                         <option value="location">מיקום </option>
                                         <option value="price">מחיר</option>
-                                    </select>
+                                    </datalist>
                                     <button class="btn btn-lg btn-primary btn-block ">חיפוש מתקדם</button>
                                 </form>
                             </li>
                             <li>
-
+                                    
                                 <form class="form-inline" action="/campground/sortby" id="sort" method="POST">
                                     <select class="form-control" onchange="this.form.submit()" name="sort">
                                         <option active value="">בחר מיקום </option>
@@ -79,6 +86,25 @@
                                         <option value="price">מחיר</option>
                                     </select>
                                 </form>
+                            </li>
+                            <li>
+                                <form id="navnarsearchoption" class="form-inline" action="/campGround/filtering" id="filter" method="POST">
+                                    <input type="text" list="filter" multiple   onchange="this.form.submit()" class="form-control"  name="filter" placeholder="חפש עיר"/>              
+                                        <datalist id="filter">
+                                        <option value="jerusalem">ירושלים</option>
+                                        <option value="safed">צפת</option>
+                                        <option value="modiin">מודיעין עילית</option>
+                                        <option value="netania">נתניה</option>
+                                        <option value="meron">מירון</option>
+                                        <option value="or-haganuz">אור הגנוז</option>
+                                        <option value="arad">ערד</option>
+                                        <option value="elad">אלעד</option>
+                                        <option value="tiberias">טבריה</option>
+                                        <option value="beitar-ilit">ביתר עילית</option>
+                                        <option value="maale-amos">מעלה עמוס</option>
+                                        <option value="kfar-chabad">כפר חבד</option>
+                                    </datalist>
+                               </form>
                             </li>
 
                         </ul>

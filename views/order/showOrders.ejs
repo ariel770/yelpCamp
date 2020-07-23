@@ -13,17 +13,18 @@
 
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">כניסה</th>
+        <th scope="col">סך</th>
         <th scope="col">יציאה</th>
+        <th scope="col">כניסה</th>
         <th scope="col">צימר</th>
+        <th scope="col">#</th>
       </tr>
     </thead>
     <%for(i=0;i<user.order.length;i++){%>
 
     <%for(b=0;b<campground.length;b++){%>
     <% if(campground[b].id == order[i].campground){%>
-     
+
 
     <% var date = new Date(order[i].from)%>
     <% var date1 = new Date(order[i].to)%>
@@ -32,16 +33,22 @@
     <%var month1 =  date1.getMonth()+1%>
     <%  var from =  date.getDate()+" / "+month+" / "+ date.getFullYear() %>
     <%  var to =  date1.getDate()+" / "+month1+" / "+ date1.getFullYear() %>
+    <%const oneDay = 24 * 60 * 60 * 1000; %>
+    <%const firstDate = new Date(date); %>
+    <%const secondDate = new Date(date1); %>
+    <%const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay)); %>
+    <%= console.log(diffDays)%>
 
     <tbody>
 
       <tr>
-        <th scope="row">#</th>
-        <td><Strong><%=from%></Strong></td>
+        <td><Strong><%=diffDays%> </Strong></td>
         <td><Strong><%=to%> </Strong></td>
+        <td><Strong><%=from%></Strong></td>
         <td>
           <p><%=campground[b].name%></p>
         </td>
+        <th scope="row">#</th>
       </tr>
     </tbody>
     <%}%>

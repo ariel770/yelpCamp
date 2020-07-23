@@ -82,7 +82,10 @@ route.post("/:campground_id/order/:user_id/",middelewhere.checkDates,function(re
         author :{
              id: req.params.user_id,
              username : req.user.username 
-        }    
+        },    
+        totalDays:{
+            
+        }
                
     }
     Order.create(body,function(err,newOrder){
@@ -130,7 +133,7 @@ route.get("/:campground_id/orders",function(req,res){
             res.redirect("back")                   
               
         }else{
-            //                [ { $match : { author : "dave" } } ]
+        
             Order.find({"_id":{$in:campground.orders}},function(err,order){
                 if(err){
                     res.redirect("back")                   

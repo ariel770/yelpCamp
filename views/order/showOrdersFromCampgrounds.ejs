@@ -1,38 +1,42 @@
 <%- include("../partials/header") %>
 
 <div class="container">
-    <h1 style="text-align: center; color: white;text-decoration-line: underline;"><%= campground.name %>  </h1>
+    <h1 style="text-align: center; color: white;text-decoration-line: underline;"><%= campground.name %> </h1>
     <div class="caption">
         <button class="btn btn-warning"><a href="/campground/<%= campground._id %>/">ראשי</a></button>
     </div>
-     
-<table class="table table-bordered table-dark" style="text-align: center;">
-    <thead >
-        <tr  >
-          <th scope="col">#</th>
-          <th style="text-align: center;" scope="col">שם</th>
-          <th style="text-align: center;"  scope="col">כניסה</th>
-          <th style="text-align: center;"  scope="col">יציאה</th>
-          <th style="text-align: center;"  scope="col">צימר</th>
-        </tr>
-    </thead>
-    
-    
-    <%for(i=0;i<order.length;i++){%>
-        
+
+    <table class="table table-bordered table-dark" style="text-align: center;">
+        <thead>
+            <tr>
+                <th style="text-align: center;" scope="col">סך הכל</th>
+                <th style="text-align: center;" scope="col">יציאה</th>
+                <th style="text-align: center;" scope="col">כניסה</th>
+                <th style="text-align: center;" scope="col">שם</th>
+                <th scope="col">#</th>
+            </tr>
+        </thead>
+
+
+        <%for(i=0;i<order.length;i++){%>
+
         <% var date = new Date(order[i].from)%>
         <% var date1 = new Date(order[i].to)%>
         <%var month  =  date.getMonth()+1%>
         <%  var from =date.getDate()+" / "+ month +" / "+ date.getFullYear() %>
         <%  var to = date1.getDate()+" / "+date1.getMonth() +" / "+  date1.getFullYear() %>
-        
+        <%const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay)); %>
+
         <tbody>
+
             <tr>
+                <td><Strong><%=diffDays%>  </Strong></td>
+                <td><Strong><%=to%> </Strong></td>
+                <td><Strong><%=from%></Strong></td>
+                <td>
+                    <p> <strong><%= order[i].author.username%></strong></p>
+                </td>
                 <td><%=i+1%></td>
-                <td>  <p> <strong><%= order[i].author.username%></strong></p>   </td>
-                <td>  <p> <strong><%=from%></strong></p>   </td>
-                <td>  <p> <strong><%=to%></strong></p>   </td>
-                <td>  <p> <strong><%=campground.name%></strong></p>   </td>
             </tr>
         </tbody>
 

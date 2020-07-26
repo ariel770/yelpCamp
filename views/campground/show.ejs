@@ -11,24 +11,48 @@
                   href="/campGround/<%= campground._id%>/orders"><%= campground.name%> </a>
                <div class="well">
                   <div class="text-right">
-                     <p> <%= campground.description %>: תיאור</p>
+                     <p><span><%= campground.author.username%></span> <strong> :איש קשר </strong> </p>
+                     <p><span> <a href="https://www.d.co.il"><%= campground.author.contact.phone %></span></a> <strong>:טלפון </strong> </p>
+                     <p><span><a href="http://www.gmail.com"><%= campground.author.contact.email %></span></a> <strong>:מייל</strong></p>
                   </div>
                   <div class="text-right">
-                     <p><a href="https://www.d.co.il"><%= campground.author.contact.phone %></a> :טלפון </p>
-                     <p><a href="http://www.gmail.com"><%= campground.author.contact.email %></a> :פרטי קשר</p>
+                     <p><span style="float: left;"><%= campground.location %> </span><strong> : כתובת</strong> </p>
                   </div>
                   <div class="text-right">
-                     <p><%= campground.location %>: מיקום </p>
+                     <p><span><%= campground.kashrut %></span> <strong>: כשרות </strong></p>
+                  </div>
+     
+                  <div class="text-right">
+                     <p><span> <%= campground.description %></span><strong>: תיאור </strong></p>
                   </div>
                   <div class="text-right">
-                     <p><%= campground.kashrut %>: כשרות </p>
+                     <p><span> <%= campground.price%> <i class="fa fa-ils" aria-hidden="true"></i> </span><strong> : מחיר ליום  </strong></p>
                   </div>
+                
+                 <div class="list-group-item btn-block btn-success">
+                   
+                  <%if(currentUser && campground.author.id.equals(currentUser.id)){%>
+
+                     <button class="btn btn-block btn-warning "><a 
+                           href="/campGround/<%= campground._id%>/edit">ערוך</a></button>
+                     <form class="delete-form" action="/campGround/<%= campground._id%>?_method=DELETE"
+                        method="POST">
+                        <button class=" btn btn-block btn-danger">מחק</button>
+                     </form>
+
+                     <%}else if(currentUser || campground.author.id.equals(currentUser.id)){ %>
+                     <button class=" btn btn-block btn-success"><a href="/campGround/<%=campground._id%>/order/<%= currentUser._id%>/new">הזמנה
+                           חדשה</a></button>
+
+                     <%}%> 
+                  
+                     </div>
                </div>
             </div>
          </div>
          <div class="row">
-            <div class="col-md-8"  style="padding-left: 0;">
-               <div class="list-group">
+
+            <div class="list-group">
                   <a class="list-group-item btn disabled">דברים כלולים</a>
 
                   <div class="well">
@@ -54,7 +78,6 @@
                         <%}%>
                   </div>       
                 </div>
-             </div>
           </div>
           
           </div> 
@@ -84,30 +107,9 @@
 
                <tr>
                   <div class="caption-full">
-                     <h4 class="pull-left"><%= campground.price%> <i class="fa fa-ils" aria-hidden="true"></i>/ללילה </h4>
-
                      <div class="caption">
-                        <div id="location_in_thumbnail">
-                           <h4>שם המקום : <a href="/campGround/<%= campground._id%>/orders"><%= campground.name %></a>
-                           </h4>
-                           <p><em><%= campground.author.username%></em> :נוצר על ידי</p>
-                        </div>
-
-                        <%if(currentUser && campground.author.id.equals(currentUser.id)){%>
-
-                        <button><a class="btn btn-warning "
-                              href="/campGround/<%= campground._id%>/edit">ערוך</a></button>
-                        <form class="delete-form" action="/campGround/<%= campground._id%>?_method=DELETE"
-                           method="POST">
-                           <button class="btn btn-danger">מחק</button>
-                        </form>
-
-                        <%}else if(currentUser || campground.author.id.equals(currentUser.id)){ %>
-                        <button><a class="btn btn-success"
-                              href="/campGround/<%=campground._id%>/order/<%= currentUser._id%>/new">הזמנה
-                              חדשה</a></button>
-
-                        <%}%> 
+                      
+                     
                 
             <div class="well">
               <div class="text-right">

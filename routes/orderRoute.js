@@ -74,7 +74,26 @@ route.get("/:campground_id/order/:user_id/new",function(req,res){
 })
 // INSERT TO DB ORDER FROM CURRENT USER
 route.post("/:campground_id/order/:user_id/",middelewhere.checkDates,function(req,res){
+    // for(i=0;i<user.order.length;i++){
 
+    //     for(b=0;b<campground.length;b++){
+    //      if(campground[b].id == order[i].campground){;
+    
+    
+    //      var date = new Date(order[i].from);
+    //      var date1 = new Date(order[i].to);
+    
+    //     var month  =  date.getMonth()+1;
+    //     var month1 =  date1.getMonth()+1;
+    //       var from =  date.getDate()+" / "+month+" / "+ date.getFullYear() ;
+    //       var to =  date1.getDate()+" / "+month1+" / "+ date1.getFullYear() ;
+    //     const oneDay = 24 * 60 * 60 * 1000; 
+    //     const firstDate = new Date(date); 
+    //     const secondDate = new Date(date1); ;
+    //     const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay)); 
+    //    console.log(diffDays);
+    //      }
+    //     }
     var body = {
         campground : req.params.campground_id,
         from : req.body.from,
@@ -82,10 +101,13 @@ route.post("/:campground_id/order/:user_id/",middelewhere.checkDates,function(re
         author :{
              id: req.params.user_id,
              username : req.user.username 
-        },    
-        totalDays:{
-            
-        }
+         }    
+        // ,totalDays:{
+        //      total: function(from,to){  
+
+
+        //      } 
+        // }
                
     }
     Order.create(body,function(err,newOrder){

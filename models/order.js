@@ -12,7 +12,8 @@ var orderSchema = new mongoose.Schema({
     campground:{
         type:mongoose.Schema.Types.ObjectId,
         ref: "Campgrounds"
-    }
+    },
+    total:Number
 })
 
 module.exports = mongoose.model("Order",orderSchema);

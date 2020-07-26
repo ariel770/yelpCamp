@@ -25,6 +25,9 @@
         <%var month  =  date.getMonth()+1%>
         <%  var from =date.getDate()+" / "+ month +" / "+ date.getFullYear() %>
         <%  var to = date1.getDate()+" / "+date1.getMonth() +" / "+  date1.getFullYear() %>
+        <%const oneDay = 24 * 60 * 60 * 1000; %>
+        <%const firstDate = new Date(date); %>
+        <%const secondDate = new Date(date1); %>
         <%const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay)); %>
 
         <tbody>

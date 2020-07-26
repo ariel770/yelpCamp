@@ -7,7 +7,9 @@ label {
     float:right;
     margin-right:15px;
 }
-
+span{
+    float:left;
+}
 label{
     color: floralwhite;
 }

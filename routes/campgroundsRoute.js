@@ -3,9 +3,17 @@ var route = express.Router();
 var Campground = require('../models/campgrounds');
 var Order = require('../models/order');
 var User = require('../models/user');
-var middlewhere = require('../middlewhere/index.js')
-
-
+var middlewhere = require('../middlewhere/index.js');
+var NodeGeocoder = require('node-geocoder');
+ 
+var options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+};
+ 
+var geocoder = NodeGeocoder(options);
 
 route.post("/filtering", function (req, res) {
     var currentLocation = req.body.filter;
@@ -87,7 +95,6 @@ route.post("/", middlewhere.isLoggedIn, function (req, res) {
     var desc = req.body.description;
     var price = req.body.price;
     var kashrut = req.body.kashrut;
-    var location = req.body.location;
     var author = {
         id: req.user.id,
         username: req.user.username,
@@ -101,19 +108,31 @@ route.post("/", middlewhere.isLoggedIn, function (req, res) {
         linen: req.body.linen,
         kettle: req.body.kettle
     }
+    console.log(req.body.location);
     
-
-    var newCG = {includeThings:includeThings, kashrut: kashrut, name: name, image: image, description: desc, price: price, author: author, location: location };
-    Campground.create(newCG, function (err, campground) {
-        console.log(campground)
-        console.log(newCG)
-        if (err) {
-            console.log(err);
-        } else {
-            res.redirect("/campGround/" + campground.id);
+    geocoder.geocode(req.body.location, function (err, data) {
+        if (err || !data.length) {
+          req.flash('error', 'Invalid address');
+          return res.redirect('back');
         }
+        var lat = data[0].latitude;
+        var lng = data[0].longitude;
+        var location = data[0].formattedAddress;
+        var newCampground = {includeThings:includeThings, price:price,kashrut:kashrut, name: name, image: image, description: desc, author:author, location: location, lat: lat, lng: lng};
+        // Create a new campground and save to DB
+        Campground.create(newCampground, function(err, campground){
+            if(err){
+                console.log(err);
+            } else {
+                //redirect back to campgrounds page
+                console.log( campground);
+                res.redirect("/campGround/" + campground.id);
+            }
+        });
+      });
     });
-});
+  
+    
 
 route.get("/new", middlewhere.isLoggedIn, function (req, res) {
     Campground.find({}, function (err, campground) {
@@ -152,7 +171,36 @@ route.get("/:id/edit", middlewhere.permissionToMakeChangesInCampgrounds, functio
     })
 })
 
-
+// UPDATE CAMPGROUND ROUTE
+// route.put("/:id", middlewhere.permissionToMakeChangesInCampgrounds, function(req, res){
+// //     console.log("-=========="+  req.body.location)
+//     geocoder.geocode(req.body.location, function (err, data) {
+//         if (err || !data.length) {
+//             req.flash('error', 'Invalid address');
+//             return res.redirect('back');
+//       }
+//       console.log("1")
+//       //   req.body.campground.lat = data[0].latitude;
+//       //   req.body.campground.lng = data[0].longitude;
+//       //   req.body.campground.location = data[0].formattedAddress;
+      
+//       var lat = data.results[0].geometry.location.lat;
+//       var lng = data.results[0].geometry.location.lng;
+//       console.log("2")
+//       var location = data.results[0].formatted_address;
+//       var newData = {campground:req.body.campground, location: location, lat: lat, lng: lng};
+//       console.log("3")
+//       Campground.findByIdAndUpdate(req.params.id, newData, function(err, campground){
+//           if(err){
+//               req.flash("error", err.message);
+//               res.redirect("back");
+//           } else {
+//               req.flash("success","Successfully Updated!");
+//               res.redirect("/campgrounds/" + campground._id);
+//           }
+//       });
+//     });
+//   });
 route.put("/:id", middlewhere.permissionToMakeChangesInCampgrounds, function (req, res) {
     var campground = {
         name: req.body.name,
@@ -170,7 +218,7 @@ route.put("/:id", middlewhere.permissionToMakeChangesInCampgrounds, function (re
             res.redirect("/campGround/" + campupdate.id);
         }
     })
-})
+});
 route.delete("/:id", function (req, res) {
     Campground.findByIdAndRemove(req.params.id, function (err) {
         if (err) {

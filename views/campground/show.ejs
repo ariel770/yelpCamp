@@ -1,19 +1,29 @@
 <%- include("../partials/header") %>
 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script
+   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMWI76MsagJKylJUfv3dr9_5FThkrYKqg&callback=initMap&libraries=&v=weekly"
+   defer></script>
+
+
 <div class="container">
    <div class="row">
 
       <div class="col-md-3">
          <div class="row">
-
+            
             <div class="list-group">
+ 
+
                <a class="list-group-item btn disabled"
                   href="/campGround/<%= campground._id%>/orders"><%= campground.name%> </a>
                <div class="well">
                   <div class="text-right">
                      <p><span><%= campground.author.username%></span> <strong> :איש קשר </strong> </p>
-                     <p><span> <a href="https://www.d.co.il"><%= campground.author.contact.phone %></span></a> <strong>:טלפון </strong> </p>
-                     <p><span><a href="http://www.gmail.com"><%= campground.author.contact.email %></span></a> <strong>:מייל</strong></p>
+                     <p><span> <a href="https://www.d.co.il"><%= campground.author.contact.phone %></span></a>
+                        <strong>:טלפון </strong> </p>
+                     <p><span><a href="http://www.gmail.com"><%= campground.author.contact.email %></span></a>
+                        <strong>:מייל</strong></p>
                   </div>
                   <div class="text-right">
                      <p><span style="float: left;"><%= campground.location %> </span><strong> : כתובת</strong> </p>
@@ -21,27 +31,28 @@
                   <div class="text-right">
                      <p><span><%= campground.kashrut %></span> <strong>: כשרות </strong></p>
                   </div>
-     
+
                   <div class="text-right">
                      <p><span> <%= campground.description %></span><strong>: תיאור </strong></p>
                   </div>
                   <div class="text-right">
-                     <p><span> <%= campground.price%> <i class="fa fa-ils" aria-hidden="true"></i> </span><strong> : מחיר ליום  </strong></p>
+                     <p><span> <%= campground.price%> <i class="fa fa-ils" aria-hidden="true"></i> </span><strong> :
+                           מחיר ליום </strong></p>
                   </div>
-                
-                 <div class="list-group-item btn-block btn-success">
-                   
-                  <%if(currentUser && campground.author.id.equals(currentUser.id)){%>
 
-                     <button class="btn btn-block btn-warning "><a 
+                  <div class="list-group-item btn-block btn-success">
+
+                     <%if(currentUser && campground.author.id.equals(currentUser.id)){%>
+
+                     <button class="btn btn-lg btn-success btn-block" "><a
                            href="/campGround/<%= campground._id%>/edit">ערוך</a></button>
-                     <form class="delete-form" action="/campGround/<%= campground._id%>?_method=DELETE"
-                        method="POST">
+                     <form class="delete-form" action="/campGround/<%= campground._id%>?_method=DELETE" method="POST">
                         <button class=" btn btn-block btn-danger">מחק</button>
                      </form>
 
                      <%}else if(currentUser || campground.author.id.equals(currentUser.id)){ %>
-                     <button class=" btn btn-block btn-success"><a href="/campGround/<%=campground._id%>/order/<%= currentUser._id%>/new">הזמנה
+                     <button class=" btn btn-block btn-success"><a
+                           href="/campGround/<%=campground._id%>/order/<%= currentUser._id%>/new">הזמנה
                            חדשה</a></button>
 
                      <%}%> 
@@ -49,6 +60,19 @@
                      </div>
                </div>
             </div>
+         </div>
+         <div class="row">
+            <div class="form-group">
+               <button class="btn btn-lg btn-success btn-block" type="button" data-toggle="collapse"
+                   data-target="#multiCollapseExample1" aria-expanded="false"
+                   aria-controls="multiCollapseExample1">צפה במפה</button>
+           </div> 
+               <div class="collapse multi-collapse" id="multiCollapseExample1">
+
+              <div class="list-group">
+               <div id="map"></div>
+         </div>
+         </div>
          </div>
          <div class="row">
 
@@ -59,30 +83,41 @@
                      <div class="text-right" >
                      
                         <%if(campground.includeThings.crib){%>
-                        <p><strong> <i class="fa fa-child" aria-hidden="true"></i>לול/מיטת תינוק</strong></p>
-                        <%}%>
+                     <p><strong> <i class="fa fa-child" aria-hidden="true"></i>לול/מיטת תינוק</strong></p>
+                     <%}%>
                      <%if(campground.includeThings.linen){%>
-                        <p><strong><i class="fa fa-bed" aria-hidden="true"></i> כלי מיטה </strong></p>
-                        <%}%>
+                     <p><strong><i class="fa fa-bed" aria-hidden="true"></i> כלי מיטה </strong></p>
+                     <%}%>
                      <%if(campground.includeThings.kettle){%>
-                        <p><strong><i class="fa fa-coffee" aria-hidden="true"></i> מיחם לשבת </strong></p>
-                        <%}%>
+                     <p><strong><i class="fa fa-coffee" aria-hidden="true"></i> מיחם לשבת </strong></p>
+                     <%}%>
                      <%if(campground.includeThings.airconditioner){%>
-                        <p><strong><i class="fa fa-snowflake-o"></i> מיזוג אוויר </strong></p>
-                        <%}%>
+                     <p><strong><i class="fa fa-snowflake-o"></i> מיזוג אוויר </strong></p>
+                     <%}%>
                      <%if(campground.includeThings.platter){%>
-                        <p><strong><i class="fa fa-fire" aria-hidden="true"></i>פלטה </strong></p>
-                        <%}%>
+                     <p><strong><i class="fa fa-fire" aria-hidden="true"></i>פלטה </strong></p>
+                     <%}%>
                      <%if(campground.includeThings.parking){%>
-                        <p><strong> <i class="fa fa-car" aria-hidden="true"></i>חניה באיזור </strong></p>
-                        <%}%>
+                     <p><strong> <i class="fa fa-car" aria-hidden="true"></i>חניה באיזור </strong></p>
+                     <%}%>
                   </div>       
                 </div>
           </div>
           
           </div> 
-          
-         
+          <!-- <div class="row">
+            <div class="form-group">
+               <button class="btn btn-lg btn-success btn-block" type="button" data-toggle="collapse"
+                   data-target="#multiCollapseExample1" aria-expanded="false"
+                   aria-controls="multiCollapseExample1">צפה במפה</button>
+           </div> 
+               <div class="collapse multi-collapse" id="multiCollapseExample1">
+
+              <div class="list-group">
+               <div id="map"></div>
+         </div>
+         </div>
+         </div> -->
          </div>
          <div class="col-md-9">
             <div class="thumbnail">
@@ -90,63 +125,87 @@
               <div  class="row">
                  <div class="col-md-6">
                     <img class="img-responsive img-thumbnail" src="<%= campground.image.home%>">
-                     </div>
-                     <div class="col-md-6">
-                        <img class="img-responsive img-thumbnail" src="<%= campground.image.autside%>">
-                     </div>
                   </div>
-                  <div class="row">
-                     <div class="col-md-6">
-                        <img class="img-responsive img-thumbnail" src="<%= campground.image.home1%>">
-                     </div>
-                     <div class="col-md-6">
-                        <img class="img-responsive img-thumbnail" src="<%= campground.image.autside1%>">
-                     </div>
+                  <div class="col-md-6">
+                     <img class="img-responsive img-thumbnail" src="<%= campground.image.autside%>">
                   </div>
                </div>
+               <div class="row">
+                  <div class="col-md-6">
+                     <img class="img-responsive img-thumbnail" src="<%= campground.image.home1%>">
+                  </div>
+                  <div class="col-md-6">
+                     <img class="img-responsive img-thumbnail" src="<%= campground.image.autside1%>">
+                  </div>
+               </div>
+            </div>
+                  
+ 
+            <tr> 
+               <div class="caption-full">
+                  <div class="caption">
 
-               <tr>
-                  <div class="caption-full">
-                     <div class="caption">
-                      
-                     
-                
-            <div class="well">
-              <div class="text-right">
-               <!-- <a class="btn btn-success" href="/campGround/<%= campground._id %>">View Orders</a> -->
-                        <a class="btn btn-success" href="/campGround/<%= campground._id %>/comment/new">הוסף תגובה</a>
-                     </div>
-                     <% campground.comments.forEach(function(comment){ %>
-                     <div class="row">
-                        <div class="col-md-12">
-                           <strong><%= comment.author.username %></strong>
 
-                           <p><%= comment.text %></p>
-                           <% if(currentUser && comment.author.id.equals(currentUser._id)){%>
-                           <a href="/campGround/<%= campground._id %>/comment/<%= comment._id%>/edit"
-                              class="btn btn-xs btn-warning">ערוך </a>
-                           <form class="delete-form"
-                              action="/campGround/<%= campground._id %>/comment/<%= comment._id%>?_method=delete"
-                              method="post">
-                              <input type="submit" class="btn btn-xs btn-danger" value="מחק">
-                           </form>
-                           <%}%> 
+
+                     <div class="well">
+                        <div class="text-right">
+                           <!-- <a class="btn btn-success" href="/campGround/<%= campground._id %>">View Orders</a> -->
+                           <a class="btn btn-success" href="/campGround/<%= campground._id %>/comment/new">הוסף
+                              תגובה</a>
+                        </div>
+                        <% campground.comments.forEach(function(comment){ %>
+                        <div class="row">
+                           <div class="col-md-12">
+                              <strong><%= comment.author.username %></strong>
+
+                              <p><%= comment.text %></p>
+                              <% if(currentUser && comment.author.id.equals(currentUser._id)){%>
+                              <a href="/campGround/<%= campground._id %>/comment/<%= comment._id%>/edit"
+                                 class="btn btn-xs btn-warning">ערוך </a>
+                              <form class="delete-form"
+                                 action="/campGround/<%= campground._id %>/comment/<%= comment._id%>?_method=delete"
+                                 method="post">
+                                 <input type="submit" class="btn btn-xs btn-danger" value="מחק">
+                              </form>
+                              <%}%> 
                      </div>
                   </div>
                  <% })%>
-
+                           </div>
                         </div>
                      </div>
-
-
-
-
-
                   </div>
+               </div>
+               
             </div>
-         </div>
       </div>
-
-   </div>
-
-   <%- include("../partials/footer") %>
+      <script>
+         function initMap() {
+            var lat = <%= campground.lat %>;
+            var lng = <%= campground.lng %>;
+            var center = { lat: lat, lng: lng };
+            var map = new google.maps.Map(document.getElementById('map'), {
+               zoom: 12,
+               center: center,
+               scrollwheel: false
+            });
+            var contentString = `
+             <strong><%= campground.name %><br />
+             <%= campground.location %></strong>
+             <p><%= campground.description %></p>
+           `
+            var infowindow = new google.maps.InfoWindow({
+               content: contentString
+            });
+            var marker = new google.maps.Marker({
+               position: center,
+               map: map
+            });
+            marker.addListener('click', function () {
+               infowindow.open(map, marker);
+            });
+         }
+      </script>
+      <script async defer
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMWI76MsagJKylJUfv3dr9_5FThkrYKqg&callback=initMap"></script>
+      <%- include("../partials/footer") %>

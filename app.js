@@ -1,4 +1,5 @@
-var express              = require('express'),           
+require('dotenv').config();
+var express              = require('express'), 
 app                      = express(),
 bodyParser               = require('body-parser'),
 mongoose                 = require('mongoose'),
@@ -14,7 +15,7 @@ LocalStrategy            = require('passport-local'),
 PassportLocalMongoose    = require('passport-local-mongoose'),
 seeds                    = require('./seeds');
 
-require('dotenv').config({ path: 'ENV_FILENAME' });
+
 //ROUTES
 var  indexRoute       = require('./routes/indexRoute'),
      commentsRoute    = require('./routes/commentsRoute'),
@@ -32,9 +33,9 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static( __dirname+"/public"));
 app.set("view engine","ejs");
-
+console.log(process.env.GEOCODER_API_KEY);
+console.log(process.env.DATABASEURL);
 //set DATABASEURL=mongodb://localhost:27017/yelp_camp_v13
-// console.log(process.env.DATABASEURL);
 // mongoose.connect("mongodb://localhost:27017/yelp_camp_v13",{useNewUrlParser:true});
 // mongoose.connect("mongodb+srv://pinjas:pinjas@cluster0-849zr.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true,
 // useCreateIndex:true}).then(()=>{

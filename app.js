@@ -59,7 +59,7 @@ mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true, useCreateInde
 
 
 //PASSPORT CONFIGURATE
-app.use(require('cookie-session')({
+app.use(require('express-session')({
     secret:"Mendel chono is the best cuted in the worlld",
     resave:false,
     saveUninitialized:false

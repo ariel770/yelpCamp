@@ -108,9 +108,10 @@ route.post("/", middlewhere.isLoggedIn, function (req, res) {
         linen: req.body.linen,
         kettle: req.body.kettle
     }
-    console.log(req.body.location);
     
+    console.log("================================================= "+req.body.location);
     geocoder.geocode(req.body.location, function (err, data) {
+        console.log("=========================   ==  == == = = =  "+data);
         if (err || !data.length) {
           req.flash('error', 'Invalid address');
           return res.redirect('back');

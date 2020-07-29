@@ -1,4 +1,11 @@
 require('dotenv').config();
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
+app.use(session({
+    secret: 'foo',
+    store: new MongoStore(options)
+}));
 var express              = require('express'), 
 app                      = express(),
 bodyParser               = require('body-parser'),

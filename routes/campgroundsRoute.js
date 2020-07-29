@@ -199,7 +199,7 @@ route.get("/:id/edit", middlewhere.permissionToMakeChangesInCampgrounds, functio
 //               res.redirect("/campgrounds/" + campground._id);
 //           }
 //       });
-//     });
+//     }); 
 //   });
 route.put("/:id", middlewhere.permissionToMakeChangesInCampgrounds, function (req, res) {
     var campground = {

@@ -60,11 +60,11 @@ strong,p{
     background-attachment:fixed;
     opacity:0.9;    
 }
-.jumbotron:hover{
+/* .jumbotron:hover{
 opacity:1;    
 transform: scale(1.10);
 transition-duration: 2s;    
-}
+} */
 
 .col-lg-9 h1, .col-lg-9 h3{
     text-align: right;

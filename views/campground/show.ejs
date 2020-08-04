@@ -8,7 +8,7 @@
 
 <div class="container">
    <div class="row">
-      
+
       <!-- <div class="col-md-3"> 
         <div class="row">
             <div class="form-group">
@@ -26,9 +26,9 @@
       </div> -->
       <div class="col-md-3">
          <div class="row">
-            
+
             <div class="list-group">
- 
+
 
                <a class="list-group-item btn disabled"
                   href="/campGround/<%= campground._id%>/orders"><%= campground.name%> </a>
@@ -41,7 +41,7 @@
                         <strong>:מייל</strong></p>
                   </div>
                   <div class="text-right">
-                     <strong> : כתובת</strong> 
+                     <strong> : כתובת</strong>
                      <span style="float: left;"><%= campground.location %> </span>
                      <p></p>
                   </div>
@@ -51,8 +51,8 @@
 
                   <div class="text-right">
                      <strong>: תיאור </strong>
-                     <span> <%= campground.description %></span> 
-                 <p></p>
+                     <span> <%= campground.description %></span>
+                     <p></p>
                   </div>
                   <div class="text-right">
                      <p><span> <%= campground.price%> <i class="fa fa-ils" aria-hidden="true"></i> </span><strong> :
@@ -61,22 +61,31 @@
 
                   <div class="list-group-item btn-block btn-success">
 
-                     <%if(currentUser && campground.author.id.equals(currentUser.id)){%>
+                     <%if(currentUser == undefined){%>
 
+                     <button class=" btn btn-block btn-success">
+                        <a href="/login/<%=campground.id%>">הזמנה חדשה</a>
+                     </button>
+
+                     <%}else{ %>
+                     <%if(campground.author.id.equals( currentUser._id)){%>
                      <button class="btn btn-lg btn-success btn-block" "><a
-                           href="/campGround/<%= campground._id%>/edit">ערוך</a></button>
+                           href=" /campGround/<%= campground._id%>/edit">ערוך</a></button>
                      <form class="delete-form" action="/campGround/<%= campground._id%>?_method=DELETE" method="POST">
                         <button class=" btn btn-block btn-danger">מחק</button>
                      </form>
+                     <%}else{ %>
 
-                     <%}else if(currentUser || campground.author.id.equals(currentUser.id)){ %>
-                     <button class=" btn btn-block btn-success"><a
-                           href="/campGround/<%=campground._id%>/order/<%= currentUser._id%>/new">הזמנה
-                           חדשה</a></button>
+                     <%=console.log("==="+campground.author.id)%>
+                     <%=console.log("==="+currentUser.id)%>
+                     <button class=" btn btn-block btn-success">
+                        <a href="/register">הזמנה חדשה</a>
+                     </button>
 
                      <%}%> 
-                  
-                     </div>
+                     <%}%>
+
+                  </div>
                </div>
             </div>
          </div>
@@ -124,7 +133,7 @@
           </div>
           
           </div>  -->
-          <!-- <div class="row">
+         <!-- <div class="row">
             <div class="form-group">
                <button class="btn btn-lg btn-success btn-block" type="button" data-toggle="collapse"
                    data-target="#multiCollapseExample1" aria-expanded="false"
@@ -137,13 +146,13 @@
          </div>
          </div>
          </div> -->
-         </div>
-         <div class="col-md-6">
-            <div class="thumbnail">
-               <div class="show-nice">
-              <div  class="row">
-                 <div class="col-md-6">
-                    <img class="img-responsive img-thumbnail" src="<%= campground.image.home%>">
+      </div>
+      <div class="col-md-6">
+         <div class="thumbnail">
+            <div class="show-nice">
+               <div class="row">
+                  <div class="col-md-6">
+                     <img class="img-responsive img-thumbnail" src="<%= campground.image.home%>">
                   </div>
                   <div class="col-md-6">
                      <img class="img-responsive img-thumbnail" src="<%= campground.image.autside%>">
@@ -158,9 +167,9 @@
                   </div>
                </div>
             </div>
-                  
- 
-            <tr> 
+
+
+            <tr>
                <div class="caption-full">
                   <div class="caption">
 
@@ -175,6 +184,7 @@
                         <% campground.comments.forEach(function(comment){ %>
                         <div class="row">
                            <div class="col-md-12">
+                              <% if(currentUser != undefined){%>
                               <strong><%= comment.author.username %></strong>
 
                               <p><%= comment.text %></p>
@@ -187,41 +197,42 @@
                                  <input type="submit" class="btn btn-xs btn-danger" value="מחק">
                               </form>
                               <%}%> 
-                     </div>
-                  </div>
-                 <% })%>
+                              <%}%>
                            </div>
                         </div>
+                        <% })%>
                      </div>
                   </div>
                </div>
-               <div class="col-md-3"> 
-                  <div class="row">
+         </div>
+      </div>
+      <div class="col-md-3">
+         <div class="row">
 
-                     <div class="list-group">
-                           <a class="list-group-item btn disabled">דברים כלולים</a>
-         
-                           <div class="well">
-                              <div class="text-right" >
-                              
-                                 <%if(campground.includeThings.crib){%>
-                              <p><strong> <i class="fa fa-child" aria-hidden="true"></i>לול/מיטת תינוק</strong></p>
-                              <%}%>
+            <div class="list-group">
+               <a class="list-group-item btn disabled">דברים כלולים</a>
+
+               <div class="well">
+                  <div class="text-right">
+
+                     <%if(campground.includeThings.crib){%>
+                     <p><strong> <i class="fa fa-child" aria-hidden="true"></i>לול/מיטת תינוק</strong></p>
+                     <%}%>
                               <%if(campground.includeThings.linen){%>
-                              <p><strong><i class="fa fa-bed" aria-hidden="true"></i> כלי מיטה </strong></p>
-                              <%}%>
+                     <p><strong><i class="fa fa-bed" aria-hidden="true"></i> כלי מיטה </strong></p>
+                     <%}%>
                               <%if(campground.includeThings.kettle){%>
-                              <p><strong><i class="fa fa-coffee" aria-hidden="true"></i> מיחם לשבת </strong></p>
-                              <%}%>
+                     <p><strong><i class="fa fa-coffee" aria-hidden="true"></i> מיחם לשבת </strong></p>
+                     <%}%>
                               <%if(campground.includeThings.airconditioner){%>
-                              <p><strong><i class="fa fa-snowflake-o"></i> מיזוג אוויר </strong></p>
-                              <%}%>
+                     <p><strong><i class="fa fa-snowflake-o"></i> מיזוג אוויר </strong></p>
+                     <%}%>
                               <%if(campground.includeThings.platter){%>
-                              <p><strong><i class="fa fa-fire" aria-hidden="true"></i>פלטה </strong></p>
-                              <%}%>
+                     <p><strong><i class="fa fa-fire" aria-hidden="true"></i>פלטה </strong></p>
+                     <%}%>
                               <%if(campground.includeThings.parking){%>
-                              <p><strong> <i class="fa fa-car" aria-hidden="true"></i>חניה באיזור </strong></p>
-                              <%}%>
+                     <p><strong> <i class="fa fa-car" aria-hidden="true"></i>חניה באיזור </strong></p>
+                     <%}%>
                            </div>       
                          </div>
                    </div>
@@ -254,10 +265,10 @@
                scrollwheel: false
             });
             var contentString = `
-             <strong><%= campground.name %><br />
-             <%= campground.location %></strong>
-             <p><%= campground.description %></p>
-           `
+                     <strong><%= campground.name %><br />
+                        <%= campground.location %></strong>
+                     <p><%= campground.description %></p>
+                     `
             var infowindow = new google.maps.InfoWindow({
                content: contentString
             });
@@ -270,6 +281,6 @@
             });
          }
       </script>
-      <script async defer
-         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMWI76MsagJKylJUfv3dr9_5FThkrYKqg&callback=initMap"></script>
-      <%- include("../partials/footer") %>
+                     <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMWI76MsagJKylJUfv3dr9_5FThkrYKqg&callback=initMap"></script>
+                     <%- include("../partials/footer") %>

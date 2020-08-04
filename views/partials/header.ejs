@@ -37,10 +37,10 @@
             <div class="collapse navbar-collapse" id="mainoption">
                 <ul class="nav navbar-nav navbar-right">
                     <% if(!currentUser){%>
-                    <li><a href="/login">כניסה</a></li>
-                    <li><a href="/register">הרשמה</a></li>
-                    <% }else { %>
-                    <%if(campGround && campground._id !== undefined) { %>
+                        <li><a href="/register">הרשמה</a></li>
+                        <li><a href="/login">כניסה</a></li>
+                        <% }else { %>
+                            <%if(campGround && campground._id !== undefined) { %>
                     <li><a href="/campGround/<%= campground._id%>/orders"> <%= campground.name%></a></li>
                     <%} %>
                     <li><a href="/campground/order/<%= currentUser.id%>/"><%= currentUser.username%></a></li>

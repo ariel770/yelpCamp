@@ -149,7 +149,8 @@ route.get("/new", middlewhere.isLoggedIn, function (req, res) {
 
 
 
-route.get("/:id", middlewhere.isLoggedIn, function (req, res) {
+// route.get("/:id", middlewhere.isLoggedIn, function (req, res) {
+route.get("/:id",  function (req, res) {
 
     Campground.findById(req.params.id).populate("comments").exec(function (err, campground) {
         if (err) {

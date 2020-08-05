@@ -102,13 +102,6 @@ route.post("/:campground_id/order/:user_id/",middelewhere.checkDates,function(re
              id: req.params.user_id,
              username : req.user.username 
          }    
-        // ,totalDays:{
-        //      total: function(from,to){  
-
-
-        //      } 
-        // }
-               
     }
     Order.create(body,function(err,newOrder){
         if(err){
@@ -136,6 +129,7 @@ route.post("/:campground_id/order/:user_id/",middelewhere.checkDates,function(re
                             Campground.find({},function(err,campground){
                                 if(err){
                                 }else{
+                               
                                     res.redirect("/campGround/"+campground.id+"/order/"+user._id);            
                                 }
                             })

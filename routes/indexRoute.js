@@ -39,6 +39,18 @@ route.post("/register", function (req, res) {
 
 
 })
+route.get("/onlylogin", function (req, res) {
+
+    res.render("onlylogin");
+
+})
+
+route.post("/onlylogin", passport.authenticate("local", {
+    successRedirect: "/campground",
+    failureRedirect: "/login"
+}), function (req, res) {
+
+})
 route.get("/login", function (req, res) {
 
     res.render("loginllessid");

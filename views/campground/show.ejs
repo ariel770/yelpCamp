@@ -63,8 +63,8 @@
 
                      <%if(currentUser == undefined){%>
 
-                     <button class=" btn btn-block btn-success">
-                        <a href="/login/<%=campground.id%>">הזמנה חדשה</a>
+                     <button class=" btn btn-block btn-primary">
+                        <a href="/login/<%=campground.id%>">להזמנה </a>
                      </button>
 
                      <%}else{ %>
@@ -79,7 +79,7 @@
                      <%=console.log("==="+campground.author.id)%>
                      <%=console.log("==="+currentUser.id)%>
                      <button class=" btn btn-block btn-success">
-                        <a href="/register">הזמנה חדשה</a>
+                        <a href="/campGround/<%=campground.id%>/order/<%=currentUser.id%>">הזמנה חדשה</a>
                      </button>
 
                      <%}%> 

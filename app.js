@@ -1,11 +1,4 @@
 require('dotenv').config();
-// const session = require('express-session');
-// const MongoStore = require('connect-mongo')(session);
-
-// app.use(session({
-//     secret: 'foo',
-//     store: new MongoStore(options)
-// }));
 var express              = require('express'), 
 app                      = express(),
 bodyParser               = require('body-parser'),
@@ -42,6 +35,7 @@ app.use(express.static( __dirname+"/public"));
 app.set("view engine","ejs");
 console.log(process.env.GEOCODER_API_KEY);
 console.log(process.env.DATABASEURL);
+
 //set DATABASEURL=mongodb://localhost:27017/yelp_camp_v13
 // mongoose.connect("mongodb://localhost:27017/yelp_camp_v13",{useNewUrlParser:true});
 // mongoose.connect("mongodb+srv://pinjas:pinjas@cluster0-849zr.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true,

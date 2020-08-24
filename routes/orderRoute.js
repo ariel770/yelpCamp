@@ -5,6 +5,7 @@ var Campground = require("../models/campgrounds");
 var Order = require("../models/order");
 var User = require("../models/user");
 var middelewhere = require("../middlewhere/index");
+const SendmailTransport = require('nodemailer/lib/sendmail-transport');
 nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
@@ -86,6 +87,7 @@ route.get("/:campground_id/order/:user_id/new", function (req, res) {
         }
     })
 })
+
 // INSERT TO DB ORDER FROM CURRENT USER
 route.post("/:campground_id/order/:user_id/", middelewhere.checkDates, function (req, res) {
 
@@ -120,88 +122,47 @@ route.post("/:campground_id/order/:user_id/", middelewhere.checkDates, function 
                         Order.find({ "_id": { $in: user.order } }, function (err, order) {
                             if (err) {
                                 res.redirect("back");
-                                //the problem is that the out put is array  I need to do array and coice the current order 
-                                //need to sent mail also to the hosted 
-                                // nedd to fix the page that send 
                             } else {
                                 Campground.find({}, function (err, campground) {
-                                    
+
                                     if (err) {
                                     } else {
-                                    for(i=0 ; i<campgroundid.orders.length+1; i++){
+                                        for (i = 0; i < campgroundid.orders.length; i++) {
+                                            if (campgroundid.orders[i] == newOrder.id) {
+                                                Order.findById(campgroundid.orders[i], function (err, orderi) {
+                                                    if (err) {
+                                                        console.log(err);
+                                                    } else {
+                                                        var a = time(orderi.from, orderi.to);
+                                                        var userMail = sendit(user, campgroundid, a)
+                                                        var adminMail = senditAdmin(user, campgroundid, a)
+                                                        
+                                                        transporter.sendMail(userMail, function (error, info) {
+                                                            if (error) {
+                                                                console.log(error);
+                                                            } else {
+                                                                console.log('Email sent: ' + info.response);
+                                                            }
+                                                        });
+                                                        transporter.sendMail(adminMail, function (error, info) {
+                                                            if (error) {
+                                                                console.log(error);
+                                                            } else {
+                                                                console.log('Email sent: ' + info.response);
+                                                            }
+                                                        });
 
-                                        if(campgroundid.orders[i]== newOrder.id){
-                                    console.log(i + " CORRECT " + "  NEWORDER.ID :  "+ newOrder.id +"  CAMPGROUNDID : "+  campgroundid.orders[i])
-                                            Order.findById(newOrder.id,function(err,orderi){
-                                                if(err){
-                                                    console.log(err);
-                                                }else{
-                                             var date = new Date(orderi.from)
-                                             var date1 = new Date(orderi.to)
-                                             var month  =  date.getMonth()+1
-                                             var month1 =  date1.getMonth()+1
-                                             var from =  date.getDate()+" / "+month+" / "+ date.getFullYear()
-                                             var to =  date1.getDate()+" / "+month1+" / "+ date1.getFullYear()
-                                             var oneDay = 24 * 60 * 60 * 1000; 
-                                             var firstDate = new Date(date);
-                                             var secondDate = new Date(date1); 
-                                             var diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
-                                                    mailOptions = {
-                                                        from: process.env.MAIL_USERNAME,
-                                                        to: user.contact.email,
-                                                        subject: campgroundid.name,
-                                                        html:
-                                                        "<html><head>" +
-                                                        "<title>Document</title>" +
-                                                        "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\"" +
-                                                        " integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">" +
-                                                    "</head>" +
-                                                    " <body style=\" border: 3px solid black ;margin: 3px;background-color: rosybrown;\" >" +
-                                                    
-                                                    "<div style=\" text-align: center;color: white;text-decoration: underline;\">" +
-                                                    
-                                                    
-                                                    "<h1> ברוכים הבאים לצימר : " + campgroundid.name + "<h1>" +
-                                                    "<br/>" +
-                                                    "<h3> הצימר ממוקם ב  : " + campgroundid.location + "<h3>" +
-                                                    "<br/>" +
-                                                    "<br/>" +
-                                                    "<div> מתאריך   : " +from+" </div>" +
-                                                    "<div> עד  :  "+to +" </div>" +
-                                                    "<div> סך ימים   : "+diffDays+" </div>" +
-                                                    "<br/>" +
-                                                    "<p> המחיר ללילה הוא :  " + campgroundid.price + "<p>" +
-                                                    "<p> סך הכל  :  " +diffDays*campgroundid.price+ "  ש\"ח <p>" +
-                                                    "<br/>" +
-                                                    "<div style=\" text-align: center; background-color: green ;\">"+ 
-                                                    "<div> מארח  : " + campgroundid.author.username + "</div>" +
-                                                    "<div> לפרטים נוספים : " + campgroundid.author.contact.phone + "</div>" +
-                                                    "<div> מייל  : " + campgroundid.author.contact.email + "</div>" +
-                                                    "</div>" +
-                                                    "<br/>" +
-                                                    
-                                                    "<div style=\"color: orange;\">" + campgroundid.includeThings.parking + "</div>" +
-                                                    "</div>" +
-                                                    "</body>" +
-                                                    " </html>"
-                                                }
-                                                };
-                                            });
-                                      
-                                        }else{
-                                            console.log(i);
-                                        }
+                                                    };
+                                                });
 
-                                    }
-                                       
-                                        transporter.sendMail(mailOptions, function (error, info) {
-                                            if (error) {
-                                                console.log(error);
                                             } else {
-                                                console.log('Email sent: ' + info.response);
+
                                             }
-                                        });
-                                        res.redirect("/campGround/" + campground.id + "/order/" + user._id);
+
+                                        }
+                                        res.redirect("/campGround/" + campgroundid.id);
+                                        //   res.redirect("back");
+                                        // res.redirect("/campGround/" + campground.id + "/order/" + user._id);
                                     }
                                 })
 
@@ -232,8 +193,103 @@ route.get("/:campground_id/orders", function (req, res) {
         }
     })
 })
+function sendit(user, details, a) {
+    mailOptions = {
+        from: process.env.MAIL_USERNAME,
+        to: user.contact.email,
+        subject: details.name,
+        html:
+            "<html><head>" +
+            "<title>Document</title>" +
+            "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\"" +
+            " integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">" +
+            "</head>" +
+            " <body style=\" border: 3px solid black ;margin: 3px;background-color: rosybrown;\" >" +
+
+            "<div style=\" text-align: center;color: white;text-decoration: underline;\">" +
 
 
+            "<h1> ברוכים הבאים לצימר : " + details.name + "<h1>" +
+            "<br/>" +
+            "<h3> הצימר ממוקם ב  : " + details.location + "<h3>" +
+            "<br/>" +
+            "<br/>" +
+            "<div> מתאריך   : " + a.from1 + " </div>" +
+            "<div> עד  :  " + a.to1 + " </div>" +
+            "<div> סך ימים   : " + a.diffDays + " </div>" +
+            "<br/>" +
+            "<p> המחיר ללילה הוא :  " + details.price + "<p>" +
+            "<p> סך הכל  :  " + a.diffDays * details.price + "  ש\"ח <p>" +
+            "<br/>" +
+            "<div style=\" text-align: center; background-color: green ;\">" +
+            "<div> מארח  : " + details.author.username + "</div>" +
+            "<div> לפרטים נוספים : " + details.author.contact.phone + "</div>" +
+            "<div> מייל  : " + details.author.contact.email + "</div>" +
+            "</div>" +
+            "<br/>" +
+
+            "<div style=\"color: orange;\">" + details.includeThings.parking + "</div>" +
+            "</div>" +
+            "</body>" +
+            " </html>"
+
+    }
+
+    return mailOptions;
+}
+function senditAdmin(user, details, a) {
+    mailOptions = {
+        from: process.env.MAIL_USERNAME,
+        to: details.author.contact.email,
+        subject: details.name,
+        html:
+            "<html><head>" +
+            "<title>Document</title>" +
+            "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\"" +
+            " integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">" +
+            "</head>" +
+            " <body style=\" border: 3px solid black ;margin: 3px;background-color: rosybrown;\" >" +
+
+            "<div style=\" text-align: center;color: white;text-decoration: underline;\">" +
+
+
+            "<h1> מר : " + details.author.username + "<h1>" +
+            "<h1>    התקבלה הזמנה  בצימר: " + details.name + " <h1>" +
+            "<br/>" +
+            "<br/>" +
+            "<div> מתאריך   : " + a.from1 + " </div>" +
+            "<div> עד  :  " + a.to1 + " </div>" +
+            "<div> סך ימים   : " + a.diffDays + " </div>" +
+            "<br/>" +
+            "<p> סך הכל  :  " + a.diffDays * details.price + "  ש\"ח <p>" +
+            "<br/>" +
+            "<div style=\" text-align: center; background-color: green ;\">" +
+            "<div> מזמין  : " + user.username + "</div>" +
+            "<div> לפרטים נוספים : " +  user.contact.phone + "</div>" +
+            "<div> מייל  : " + user.contact.email + "</div>" +
+            "</div>" +
+            "<br/>" +
+
+            "</body>" +
+            " </html>"
+
+    }
+
+    return mailOptions;
+}
+function time(a, b) {
+    var date = new Date(a)
+    var date1 = new Date(b)
+    var month = date.getMonth() + 1
+    var month1 = date1.getMonth() + 1
+    var from1 = date.getDate() + " / " + month + " / " + date.getFullYear()
+    var to1 = date1.getDate() + " / " + month1 + " / " + date1.getFullYear()
+    var oneDay = 24 * 60 * 60 * 1000;
+    var firstDate = new Date(date);
+    var secondDate = new Date(date1);
+    var diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+    return { from1, to1, diffDays };
+}
 module.exports = route;
 
 

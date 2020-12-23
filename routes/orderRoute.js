@@ -80,13 +80,18 @@ route.get("/:campground_id/order/:user_id/new", function (req, res) {
                 if (err) {
                     res.redirect("back")
                 } else {
-                    res.render("order/reservation", { campground: campground, user: user });
+                    Order.find({}, function (err, order) {
+                        if (err) {
+                        } else {
+                            res.render("order/reservation", { campground: campground, user: user, order: order });
+                        }
+                    });
                 }
-            })
+            });
 
         }
-    })
-})
+    });
+});
 
 // INSERT TO DB ORDER FROM CURRENT USER
 route.post("/:campground_id/order/:user_id/", middelewhere.checkDates, function (req, res) {
@@ -136,7 +141,11 @@ route.post("/:campground_id/order/:user_id/", middelewhere.checkDates, function 
                                                         var a = time(orderi.from, orderi.to);
                                                         var userMail = sendit(user, campgroundid, a)
                                                         var adminMail = senditAdmin(user, campgroundid, a)
-                                                        
+                                                        //  ==========================
+                                                        console.log(a)
+                                                        console.log(userMail)
+                                                        console.log(adminMail)
+                                                        //  ==========================
                                                         transporter.sendMail(userMail, function (error, info) {
                                                             if (error) {
                                                                 console.log(error);
@@ -265,7 +274,7 @@ function senditAdmin(user, details, a) {
             "<br/>" +
             "<div style=\" text-align: center; background-color: green ;\">" +
             "<div> מזמין  : " + user.username + "</div>" +
-            "<div> לפרטים נוספים : " +  user.contact.phone + "</div>" +
+            "<div> לפרטים נוספים : " + user.contact.phone + "</div>" +
             "<div> מייל  : " + user.contact.email + "</div>" +
             "</div>" +
             "<br/>" +

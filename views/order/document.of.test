@@ -1,0 +1,75 @@
+         
+         <% var a= [];%>
+        <% for (i=0; i<campground.orders.length ; i++ ) {%>
+        <% for (b=0; b<order.length ; b++ ) {%>
+        <%if(order[b].id == campground.orders[i] ){%>
+          
+          <% var date = new Date(order[i].from)%>
+          <!-- <% var date1 = new Date(order[i].to)%> -->
+          <%var month  =  date.getMonth()+1%>
+          <!-- <%var month1 =  date1.getMonth()+1%> -->
+          <%var from =  date.getDate()+"-"+month+"-"+ date.getFullYear() %>
+          <!-- <%var to =  date1.getDate()+" / "+month1+" / "+ date1.getFullYear() %> -->
+          <!-- <%const oneDay = 24 * 60 * 60 * 1000; %>
+          <%const firstDate = new Date(date); %> -->
+          <!-- <%const secondDate = new Date(date1); %> -->
+          <!-- <%const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay)); %> -->
+          
+         <%a+= "\""+from+"\" " ; %> 
+         
+         
+         
+         
+         <% }%>
+         
+         <% }%>
+         <% }%>
+         <%=console.log(a.toString())%>
+
+=======
+
+        <% var a= [];%>
+        <% for (i=0; i<campground.orders.length ; i++ ) {%>
+        <% for (b=0; b<order.length ; b++ ) {%>
+         <%if(order[b].id == campground.orders[i] ){%>
+                 
+  
+          <% var date = new Date(order[i].from)%>
+                  
+                 
+          <%var year = String((date.getFullYear()))%>
+          <%var month = String((date.getMonth()+1))%>
+         <%var day = String(date.getDate())%>
+          <%if(day.length == 1){%>
+            <%day = '0' + day%>
+            <%}%>
+            <%if(month.length == 1){%>
+              <%month = '0' + month%>
+              <%}%>
+          <%a[i] += year + '-' + month + "-" + day %>
+          <%=console.log(a[i])%>
+         <% }%>
+         
+         <% }%>
+         <% }%>
+
+
+
+
+
+========================
+
+// function myFunction() {
+//   console.log("sadjasghdaskjdsadsa");
+//   document.getElementsByClassName("myDate").disabled = true;
+// }
+
+
+// var disabledDates = ["2020-08-28","2020-08-27","2020-08-26"]
+// $('input').datepicker({
+//     beforeShowDay: function(date){
+//         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+//         return [ disabledDates.indexOf(string) == -1 ]
+//     }
+// });
+=========================

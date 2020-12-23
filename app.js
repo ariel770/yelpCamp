@@ -36,15 +36,6 @@ app.set("view engine","ejs");
 console.log(process.env.GEOCODER_API_KEY);
 console.log(process.env.DATABASEURL);
 
-//set DATABASEURL=mongodb://localhost:27017/yelp_camp_v13
-// mongoose.connect("mongodb://localhost:27017/yelp_camp_v13",{useNewUrlParser:true});
-// mongoose.connect("mongodb+srv://pinjas:pinjas@cluster0-849zr.mongodb.net/test?retryWrites=true&w=majority",{useNewUrlParser:true,
-// useCreateIndex:true}).then(()=>{
-//    console.log("CONNECTED TO DB") 
-// }).catch((err) => {
-//         console.log("ERROR!!!"+err);
-
-// });
 
 
 mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
@@ -74,7 +65,7 @@ app.use(function(req,res,next){
     next();
 })
 
-app.use( indexRoute);
+app.use(indexRoute);
 app.use("/campGround",orderRoute);
 app.use("/campGround",campgroundsRoute);
 app.use("/campGround/:id/comment",commentsRoute);

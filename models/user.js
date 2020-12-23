@@ -15,8 +15,6 @@ var userSchema = new mongoose.Schema({
              ref:"Order"
             }
             ]
-    
 });
 userSchema.plugin(PassportLocalMongoose)
 module.exports = mongoose.model("User",userSchema);
-//

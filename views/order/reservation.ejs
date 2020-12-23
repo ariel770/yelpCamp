@@ -1,30 +1,77 @@
 <%- include ("../partials/header")%>
+
+<% var a= [];%>
 <div class="container">
   <div class="row">
     <h1 style="text-align: center; color: white; text-decoration-line: underline;"><%=user.username%> : הזמנה עבור </h1>
     <h3 style="text-align: center;color: white ; text-decoration-line: underline;"><%=campground.name%> : לצימר</h3>
     <div style="width:30%; margin: 20px auto;">
-    <form action="/campGround/<%=campground.id%>/order/<%=user.id%>" method="POST">  
-      <div class="form-group">
-        <input type="date" class="form-control" name="from" placeholder="מתאריך">
-      </div>
-      <div class="form-group">
-        <input type="date" class="form-control" name="to"  placeholder="לתאריך">
-      </div>
-      <div class="form-group">
-        <input class="btn btn-lg btn-primary btn-block" type="submit" class="form-control" value="הזמן עכשיו">
-      </div>
-  
-      <div class="form-group">
-           <button><a class="btn btn-sm btn-danger btn-block" href="javascript:history.back()">עמוד קודם</a></button>      
+      <form action="/campGround/<%=campground.id%>/order/<%=user.id%>" method="POST">
+        <!-- nedd check the current orders of current campgrounsds  -->
 
-       </div>
-  </form> 
+
+        <% for (i=0; i<campground.orders.length ; i++ ) {%>
+        <% for (b=0; b<order.length ; b++ ) {%>
+        <%if(order[b].id == campground.orders[i] ){%>
+
+
+        <% var date = new Date(order[i].from)%>
+
+
+        <%var month = String((date.getMonth()+1))%>
+        <%var day = String(date.getDate())%>
+        <%if(day.length == 1){%>
+        <%day = '0' + day%>
+        <%}%>
+              <%if(month.length == 1){%>
+        <%month = '0' + month%>
+        <%}%>
+            <%a[i] = date.getFullYear() + '-' + month + "-" + day%>
+        <% }%>
+
+        <% }%>
+        <% }%>
+
+
+
+        <div class="form-group">
+          <input type="date" id="from" class="form-control myDate" name="from" placeholder="מתאריך" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <input type="date" id="to" class="form-control myDate" name="to" placeholder="לתאריך" autocomplete="off">
+        </div>
+        <div class=" form-group">
+          <input class="btn btn-lg btn-primary btn-block" type="submit" class="form-control" value="הזמן עכשיו">
+        </div>
+
+        <div class="form-group">
+          <button><a class="btn btn-sm btn-danger btn-block" href="javascript:history.back()">עמוד קודם</a></button>
+
+        </div>
+      </form>
+    </div>
   </div>
- </div>
 </div>
+<script>
+var array = ["2020-09-14","2020-09-15","2020-09-16"];
+    $(document).ready(function () {
+      var minDate = new Date();
+      $("input").datepicker({
+        minDate: minDate,
+        beforeShowDay: function (date) {
+          var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+          return [test.indexOf(string) == -1]
+        }
+      })
+    });
+
+</script>
+
+
+<!-- <script>
+// document.getElementById("myDate").disabled = true;
   
-  
-  
-  <%- include ("../partials/footer")%>
-  
+</script>
+ -->
+
+<%- include ("../partials/footer")%>

@@ -14,7 +14,7 @@ passport                 = require('passport'),
 LocalStrategy            = require('passport-local'),
 PassportLocalMongoose    = require('passport-local-mongoose'),
 seeds                    = require('./seeds');
-
+app.use(express.static('upload'));
 
 //ROUTES
 var  indexRoute       = require('./routes/indexRoute'),

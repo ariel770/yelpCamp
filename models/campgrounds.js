@@ -9,10 +9,26 @@ var campgroundSchema = new mongoose.Schema({
    lng: Number,
   
    image: {
-      home: String,
-      autside: String,
-      home1: String,
-      autside1: String
+      home: {
+         data: Buffer,
+         contentType: String,
+    
+     },
+      home1:{
+         data: Buffer,
+         contentType: String,
+    
+     },
+      autside: {
+         data: Buffer,
+         contentType: String,
+    
+     },
+      autside1: {
+         data: Buffer,
+         contentType: String,
+    
+     }
    },
    description: String,
    price: String,

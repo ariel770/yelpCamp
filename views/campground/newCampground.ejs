@@ -3,7 +3,7 @@
     <div class="row">
         <h1 style="text-align: center;color: white;text-decoration: underline;">הוסף מקום אירוח חדש</h1>
         <div style="width:50%; margin: 20px auto;">
-            <form action="/campGround" autocomplete="off" method="POST">
+            <form action="/campGround" autocomplete="off" method="POST" enctype="multipart/form-data">
                 <!-- <form action="/campGround" autocomplete="off" method="POST"> -->
                 <div class="row">
                     <div class="col-md-6">
@@ -53,11 +53,11 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <input type="text"  autocomplete="off"class="form-control" name="home" placeholder="תמונה מתוך הדירה "
+                                <input type="file"  autocomplete="off"class="form-control" name="home" placeholder="תמונה מתוך הדירה "
                                     required>
                             </div>
                             <div class="form-group">
-                                <input type="text" autocomplete="off" class="form-control" name="home1" placeholder="תמונה מתוך הדירה "
+                                <input type="file" autocomplete="off" class="form-control" name="home1" placeholder="תמונה מתוך הדירה "
                                     required>
                             </div>
 
@@ -65,11 +65,11 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <input type="text"  autocomplete="off"class="form-control" name="autside1" placeholder="תמונה מבחוץ"
+                                <input type="file"  autocomplete="off"class="form-control" name="autside1" placeholder="תמונה מבחוץ"
                                     required>
                             </div>
                             <div class="form-group">
-                                <input type="text" autocomplete="off" class="form-control" name="autside" placeholder="תמונה מבחוץ"
+                                <input type="file" autocomplete="off" class="form-control" name="autside" placeholder="תמונה מבחוץ"
                                     required>
                             </div>
                         </div>

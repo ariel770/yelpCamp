@@ -83,7 +83,10 @@
 
         <div class=" col-lg-3 col-md-4 col-sm-6">
         <div class="thumbnail">
-        <img style="width: 286px; height: 200px;" src="<%= campground.image.home %>" class="img-thumbnail">
+          <%if(campground.image.autside.contentType !=undefined ){%>
+        <img style="width: 286px; height: 200px;"src="data:image/<%=campground.image.autside.contentType%>;base64,
+        <%=campground.image.autside.data.toString('base64')%>" alt="חסרה תמונה! " class="img-thumbnail">
+       <%}%>
         <div class="caption">
           <h4><%= campground.name %> </h4>
           <h4><%= campground.author.username%> </h4>
@@ -96,4 +99,4 @@
     <% });%>
   </div>
 </div>
-<%- include("../partials/footer") %>
+<%- include("../partials/footer") %> 

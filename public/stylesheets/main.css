@@ -180,7 +180,7 @@ input[type='checkbox']:checked {
     border-radius:5px;
     box-shadow:0 6px black;
   }
-  
+  /* some changes */
   #btn1:hover{
     box-shadow:0 4px black;
     top:4px;
